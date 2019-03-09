@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_07ulp1u" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.0.0-beta.2">
+  <decision id="Decision_0pa8gvl" name="Decision 1">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>role</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1npkbq5">
+          <text>"vip","normal"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0t2kpvr">
+        <inputExpression id="LiteralExpression_1t6cic2" typeRef="string">
+          <text>request_type</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0zcrmms">
+          <text>"question","problem"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1vqp8f3">
+        <inputExpression id="LiteralExpression_0w7eloq" typeRef="string">
+          <text>priority</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" typeRef="string" />
+      <rule id="DecisionRule_115dbdj">
+        <inputEntry id="UnaryTests_1wlvc8i">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lf6ozf">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mmv5er">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vptyo3">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
