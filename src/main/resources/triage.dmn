@@ -17,7 +17,7 @@
           <text>priority</text>
         </inputExpression>
       </input>
-      <output id="output_1" typeRef="string" />
+      <output id="output_1" name="category" typeRef="string" />
       <rule id="DecisionRule_115dbdj">
         <inputEntry id="UnaryTests_1wlvc8i">
           <text>&gt;=5</text>

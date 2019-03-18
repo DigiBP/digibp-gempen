@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_121rrir" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-beta.2">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_121rrir" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-beta.2">
   <bpmn:collaboration id="Collaboration_13iu2pn">
     <bpmn:participant id="Participant_0g4ebh1" name="Employee" />
     <bpmn:participant id="Participant_1ilyy4f" name="Helpdesk" processRef="Process_0j58686" />
@@ -17,7 +17,7 @@
     <bpmn:messageFlow id="MessageFlow_0mqc7mb" sourceRef="Task_0nfadfv" targetRef="Participant_0bznfpl" />
     <bpmn:messageFlow id="MessageFlow_1ofzn9b" sourceRef="Task_0pefmk4" targetRef="Participant_0g4ebh1" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0j58686" isExecutable="false">
+  <bpmn:process id="Process_0j58686" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0qoe1c4">
       <bpmn:lane id="Lane_1n0argp" name="Helpdesk Agent">
         <bpmn:flowNodeRef>Task_0kg5mj3</bpmn:flowNodeRef>
@@ -31,22 +31,22 @@
       </bpmn:lane>
       <bpmn:lane id="Lane_12k0g4h">
         <bpmn:flowNodeRef>StartEvent_1qug235</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0p2ixwj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0c15u8y</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1wveuj4</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1k6t5ai</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1phyld0</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0l5mm0m</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0l5pq1m</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0c34fym</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0afqw0w</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_119lkhc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0p2ixwj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1wveuj4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1phyld0</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1x317c9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0l5mm0m</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0lolxqa</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0b3s07x</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_04gp8y7</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0lolxqa</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0nfadfv</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1xr4gir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0nfadfv</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_08823aj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1t0qowo</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1qtruxp</bpmn:flowNodeRef>
@@ -54,35 +54,19 @@
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1qug235" name="Incident Occurs">
       <bpmn:outgoing>SequenceFlow_06s8w2h</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_0soekpk" />
     </bpmn:startEvent>
-    <bpmn:businessRuleTask id="Task_0p2ixwj" name="Perform Tirage">
-      <bpmn:incoming>SequenceFlow_06s8w2h</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1xyk9a0</bpmn:outgoing>
-    </bpmn:businessRuleTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0c15u8y" name="Incident processing?">
       <bpmn:incoming>SequenceFlow_1xyk9a0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_13j03pg</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1jv7cnv</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0qyx473</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Task_1wveuj4" name="Create Prioritty Ticket">
-      <bpmn:incoming>SequenceFlow_13j03pg</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1a2pmqo</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1k6t5ai" name="Language?">
       <bpmn:incoming>SequenceFlow_1jv7cnv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dw7yt2</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_06cg8vz</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Task_1phyld0" name="Show English Chatbot">
-      <bpmn:incoming>SequenceFlow_1dw7yt2</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0vior9l</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0l5mm0m" name="Process Question">
-      <bpmn:incoming>SequenceFlow_0vior9l</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0y0doqr</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:dataStoreReference id="DataStoreReference_1k5a3dh" name="Knowledge Base (Elastic Search)" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_0l5pq1m">
       <bpmn:incoming>SequenceFlow_17nqu02</bpmn:incoming>
@@ -91,14 +75,24 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_06s8w2h" sourceRef="StartEvent_1qug235" targetRef="Task_0p2ixwj" />
     <bpmn:sequenceFlow id="SequenceFlow_1xyk9a0" sourceRef="Task_0p2ixwj" targetRef="ExclusiveGateway_0c15u8y" />
-    <bpmn:sequenceFlow id="SequenceFlow_13j03pg" name="high priority" sourceRef="ExclusiveGateway_0c15u8y" targetRef="Task_1wveuj4" />
-    <bpmn:sequenceFlow id="SequenceFlow_1jv7cnv" name="low priority" sourceRef="ExclusiveGateway_0c15u8y" targetRef="ExclusiveGateway_1k6t5ai" />
-    <bpmn:sequenceFlow id="SequenceFlow_0qyx473" name="request declined" sourceRef="ExclusiveGateway_0c15u8y" targetRef="EndEvent_0afqw0w" />
+    <bpmn:sequenceFlow id="SequenceFlow_13j03pg" name="high priority" sourceRef="ExclusiveGateway_0c15u8y" targetRef="Task_1wveuj4">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${category=="green"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1jv7cnv" name="low priority" sourceRef="ExclusiveGateway_0c15u8y" targetRef="ExclusiveGateway_1k6t5ai">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${category=="yellow"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0qyx473" name="request declined" sourceRef="ExclusiveGateway_0c15u8y" targetRef="EndEvent_0afqw0w">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${category=="red"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1a2pmqo" sourceRef="Task_1wveuj4" targetRef="Task_0kg5mj3" />
     <bpmn:sequenceFlow id="SequenceFlow_1lpk9w8" sourceRef="Task_0kg5mj3" targetRef="Task_0pefmk4" />
     <bpmn:sequenceFlow id="SequenceFlow_0vior9l" sourceRef="Task_1phyld0" targetRef="Task_0l5mm0m" />
-    <bpmn:sequenceFlow id="SequenceFlow_1dw7yt2" name="EN" sourceRef="ExclusiveGateway_1k6t5ai" targetRef="Task_1phyld0" />
-    <bpmn:sequenceFlow id="SequenceFlow_06cg8vz" name="DE" sourceRef="ExclusiveGateway_1k6t5ai" targetRef="Task_1x317c9" />
+    <bpmn:sequenceFlow id="SequenceFlow_1dw7yt2" name="EN" sourceRef="ExclusiveGateway_1k6t5ai" targetRef="Task_1phyld0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${language=="en"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_06cg8vz" name="DE" sourceRef="ExclusiveGateway_1k6t5ai" targetRef="Task_1x317c9">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${language=="de"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1blpgyb" sourceRef="Task_1x317c9" targetRef="Task_0lolxqa" />
     <bpmn:sequenceFlow id="SequenceFlow_1ct2mqg" sourceRef="Task_0lolxqa" targetRef="Task_04gp8y7" />
     <bpmn:sequenceFlow id="SequenceFlow_1fzuy85" sourceRef="Task_04gp8y7" targetRef="Task_0nfadfv" />
@@ -113,8 +107,12 @@
       <bpmn:outgoing>SequenceFlow_0mmv9jw</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0mih47p" sourceRef="Task_08823aj" targetRef="ExclusiveGateway_0c34fym" />
-    <bpmn:sequenceFlow id="SequenceFlow_0yx7pkh" name="no" sourceRef="ExclusiveGateway_0c34fym" targetRef="Task_1t0qowo" />
-    <bpmn:sequenceFlow id="SequenceFlow_0mmv9jw" name="yes" sourceRef="ExclusiveGateway_0c34fym" targetRef="Task_1qtruxp" />
+    <bpmn:sequenceFlow id="SequenceFlow_0yx7pkh" name="no" sourceRef="ExclusiveGateway_0c34fym" targetRef="Task_1t0qowo">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${satisfied=="false"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0mmv9jw" name="yes" sourceRef="ExclusiveGateway_0c34fym" targetRef="Task_1qtruxp">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${satisfied=="true"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1puq7q3" sourceRef="Task_1qtruxp" targetRef="EndEvent_119lkhc" />
     <bpmn:userTask id="Task_0kg5mj3" name="Takeover ticket">
       <bpmn:incoming>SequenceFlow_1a2pmqo</bpmn:incoming>
@@ -129,8 +127,12 @@
       <bpmn:outgoing>SequenceFlow_1h7l3qr</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_02i4zha" sourceRef="Task_0pjykdz" targetRef="ExclusiveGateway_0o2ahf6" />
-    <bpmn:sequenceFlow id="SequenceFlow_0qbcto6" sourceRef="ExclusiveGateway_0o2ahf6" targetRef="EndEvent_0jz5lch" />
-    <bpmn:sequenceFlow id="SequenceFlow_1h7l3qr" sourceRef="ExclusiveGateway_0o2ahf6" targetRef="Task_1hu8c79" />
+    <bpmn:sequenceFlow id="SequenceFlow_0qbcto6" sourceRef="ExclusiveGateway_0o2ahf6" targetRef="EndEvent_0jz5lch">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${kb_exists=="yes"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1h7l3qr" sourceRef="ExclusiveGateway_0o2ahf6" targetRef="Task_1hu8c79">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${kb_exists=="no"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_0jz5lch">
       <bpmn:incoming>SequenceFlow_0qbcto6</bpmn:incoming>
     </bpmn:endEvent>
@@ -144,48 +146,6 @@
     <bpmn:endEvent id="EndEvent_119lkhc">
       <bpmn:incoming>SequenceFlow_1puq7q3</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Task_1x317c9" name="Show German Chatbot">
-      <bpmn:incoming>SequenceFlow_06cg8vz</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1blpgyb</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0b3s07x" name="Lookup in KB">
-      <bpmn:incoming>SequenceFlow_0y0doqr</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_17nqu02</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0pjejwi">
-        <bpmn:targetRef>DataStoreReference_1k5a3dh</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_04gp8y7" name="Translate Question">
-      <bpmn:incoming>SequenceFlow_1ct2mqg</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1fzuy85</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0lolxqa" name="Process Question">
-      <bpmn:incoming>SequenceFlow_1blpgyb</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1ct2mqg</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0nfadfv" name="Lookup in KB">
-      <bpmn:incoming>SequenceFlow_1fzuy85</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0s0dtif</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_1u7m0q3">
-        <bpmn:targetRef>DataStoreReference_1k5a3dh</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1xr4gir" name="Translate Solution">
-      <bpmn:incoming>SequenceFlow_0s0dtif</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1y5fouf</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_08823aj" name="Provide solution">
-      <bpmn:incoming>SequenceFlow_0qx62vg</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0mih47p</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1t0qowo" name="Create Ticket ">
-      <bpmn:incoming>SequenceFlow_0yx7pkh</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0derym6</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1qtruxp" name="Create Ticket as closed">
-      <bpmn:incoming>SequenceFlow_0mmv9jw</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1puq7q3</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:userTask id="Task_0pefmk4" name="Find Solution">
       <bpmn:incoming>SequenceFlow_1lpk9w8</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1nmor1z</bpmn:outgoing>
@@ -201,7 +161,73 @@
       <bpmn:incoming>SequenceFlow_1h7l3qr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bay6kp</bpmn:outgoing>
     </bpmn:manualTask>
+    <bpmn:businessRuleTask id="Task_0p2ixwj" name="Perform Tirage" camunda:decisionRef="Decision_0pa8gvl">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="role">role</camunda:inputParameter>
+          <camunda:inputParameter name="work_impact">work_impact</camunda:inputParameter>
+          <camunda:inputParameter name="priority">priority</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_06s8w2h</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1xyk9a0</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:task id="Task_1wveuj4" name="Create Prioritty Ticket">
+      <bpmn:incoming>SequenceFlow_13j03pg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1a2pmqo</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_1phyld0" name="Show English Chatbot">
+      <bpmn:incoming>SequenceFlow_1dw7yt2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0vior9l</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_1x317c9" name="Show German Chatbot">
+      <bpmn:incoming>SequenceFlow_06cg8vz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1blpgyb</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_0l5mm0m" name="Process Question">
+      <bpmn:incoming>SequenceFlow_0vior9l</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0y0doqr</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_0lolxqa" name="Process Question">
+      <bpmn:incoming>SequenceFlow_1blpgyb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ct2mqg</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_0b3s07x" name="Lookup in KB">
+      <bpmn:incoming>SequenceFlow_0y0doqr</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_17nqu02</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0pjejwi">
+        <bpmn:targetRef>DataStoreReference_1k5a3dh</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:task id="Task_04gp8y7" name="Translate Question">
+      <bpmn:incoming>SequenceFlow_1ct2mqg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1fzuy85</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_1xr4gir" name="Translate Solution">
+      <bpmn:incoming>SequenceFlow_0s0dtif</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1y5fouf</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_0nfadfv" name="Lookup in KB">
+      <bpmn:incoming>SequenceFlow_1fzuy85</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0s0dtif</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1u7m0q3">
+        <bpmn:targetRef>DataStoreReference_1k5a3dh</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:task id="Task_08823aj" name="Provide solution">
+      <bpmn:incoming>SequenceFlow_0qx62vg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0mih47p</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_1t0qowo" name="Create Ticket ">
+      <bpmn:incoming>SequenceFlow_0yx7pkh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0derym6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_1qtruxp" name="Create Ticket as closed">
+      <bpmn:incoming>SequenceFlow_0mmv9jw</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1puq7q3</bpmn:outgoing>
+    </bpmn:task>
   </bpmn:process>
+  <bpmn:message id="Message_0soekpk" name="Incident_request" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_13iu2pn">
       <bpmndi:BPMNShape id="Participant_161mnfv_di" bpmnElement="Participant_0g4ebh1" isHorizontal="true">
@@ -226,9 +252,6 @@
         <di:waypoint x="284" y="752" />
         <di:waypoint x="334" y="752" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="BusinessRuleTask_0v6hvdi_di" bpmnElement="Task_0p2ixwj">
-        <dc:Bounds x="334" y="712" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0c15u8y_di" bpmnElement="ExclusiveGateway_0c15u8y" isMarkerVisible="true">
         <dc:Bounds x="484" y="727" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -278,12 +301,6 @@
       <bpmndi:BPMNShape id="UserTask_1gwu2uq_di" bpmnElement="Task_0kg5mj3">
         <dc:Bounds x="2127" y="525" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_0n5f33e_di" bpmnElement="Task_1wveuj4">
-        <dc:Bounds x="617" y="712" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_0mwfflj_di" bpmnElement="Task_1phyld0">
-        <dc:Bounds x="809" y="822" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_1eajdkk_di" bpmnElement="MessageFlow_1eajdkk">
         <di:waypoint x="266" y="173" />
         <di:waypoint x="266" y="734" />
@@ -292,9 +309,6 @@
         <di:waypoint x="909" y="862" />
         <di:waypoint x="972" y="862" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0lmlxv4_di" bpmnElement="Task_0l5mm0m">
-        <dc:Bounds x="972" y="822" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_0ut70nz_di" bpmnElement="MessageFlow_0ut70nz">
         <di:waypoint x="1041" y="822" />
         <di:waypoint x="1041" y="605" />
@@ -502,33 +516,6 @@
         <di:waypoint x="2902" y="565" />
         <di:waypoint x="2982" y="565" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0cggn0f_di" bpmnElement="Task_1x317c9">
-        <dc:Bounds x="809" y="922" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_17yo95o_di" bpmnElement="Task_0b3s07x">
-        <dc:Bounds x="1135" y="822" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_0ia54jn_di" bpmnElement="Task_04gp8y7">
-        <dc:Bounds x="1135" y="922" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1t2x7d2_di" bpmnElement="Task_0lolxqa">
-        <dc:Bounds x="972" y="922" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_07qpel4_di" bpmnElement="Task_0nfadfv">
-        <dc:Bounds x="1271" y="922" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_0fhuohw_di" bpmnElement="Task_1xr4gir">
-        <dc:Bounds x="1402" y="922" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_0a9zvh2_di" bpmnElement="Task_08823aj">
-        <dc:Bounds x="1695" y="822" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_0jno0h3_di" bpmnElement="Task_1t0qowo">
-        <dc:Bounds x="1949" y="822" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1lm0n4b_di" bpmnElement="Task_1qtruxp">
-        <dc:Bounds x="1949" y="932" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_1jkfcc0_di" bpmnElement="Task_0pefmk4">
         <dc:Bounds x="2304" y="525" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -540,6 +527,45 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_12k0g4h_di" bpmnElement="Lane_12k0g4h" isHorizontal="true">
         <dc:Bounds x="187" y="677" width="2911" height="395" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0obdu2k_di" bpmnElement="Task_0p2ixwj">
+        <dc:Bounds x="334" y="712" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1ftgnjx_di" bpmnElement="Task_1wveuj4">
+        <dc:Bounds x="617" y="712" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_01hy0lc_di" bpmnElement="Task_1phyld0">
+        <dc:Bounds x="809" y="822" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_09asxtp_di" bpmnElement="Task_1x317c9">
+        <dc:Bounds x="809" y="922" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0574bjv_di" bpmnElement="Task_0l5mm0m">
+        <dc:Bounds x="972" y="822" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1gij2cq_di" bpmnElement="Task_0lolxqa">
+        <dc:Bounds x="972" y="922" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0iihwg8_di" bpmnElement="Task_0b3s07x">
+        <dc:Bounds x="1135" y="822" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0obbgzh_di" bpmnElement="Task_04gp8y7">
+        <dc:Bounds x="1135" y="922" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1qrn0b9_di" bpmnElement="Task_1xr4gir">
+        <dc:Bounds x="1402" y="922" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0g26ctp_di" bpmnElement="Task_0nfadfv">
+        <dc:Bounds x="1271" y="922" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_10bc5ei_di" bpmnElement="Task_08823aj">
+        <dc:Bounds x="1695" y="822" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0y4aqwn_di" bpmnElement="Task_1t0qowo">
+        <dc:Bounds x="1949" y="822" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0oracdj_di" bpmnElement="Task_1qtruxp">
+        <dc:Bounds x="1949" y="932" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
