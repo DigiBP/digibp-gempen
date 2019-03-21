@@ -31,7 +31,6 @@
       </bpmn:lane>
       <bpmn:lane id="Lane_12k0g4h">
         <bpmn:flowNodeRef>StartEvent_1qug235</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_0c15u8y</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1k6t5ai</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0l5pq1m</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0c34fym</bpmn:flowNodeRef>
@@ -50,18 +49,13 @@
         <bpmn:flowNodeRef>Task_08823aj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1t0qowo</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1qtruxp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_0c15u8y</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1qug235" name="Incident Occurs">
       <bpmn:outgoing>SequenceFlow_06s8w2h</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0soekpk" />
     </bpmn:startEvent>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_0c15u8y" name="Incident processing?">
-      <bpmn:incoming>SequenceFlow_1xyk9a0</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_13j03pg</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_1jv7cnv</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_0qyx473</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1k6t5ai" name="Language?">
       <bpmn:incoming>SequenceFlow_1jv7cnv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dw7yt2</bpmn:outgoing>
@@ -167,6 +161,8 @@
           <camunda:inputParameter name="role">role</camunda:inputParameter>
           <camunda:inputParameter name="work_impact">work_impact</camunda:inputParameter>
           <camunda:inputParameter name="priority">priority</camunda:inputParameter>
+          <camunda:outputParameter name="category">category</camunda:outputParameter>
+          <camunda:outputParameter name="language">language</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_06s8w2h</bpmn:incoming>
@@ -226,6 +222,12 @@
       <bpmn:incoming>SequenceFlow_0mmv9jw</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1puq7q3</bpmn:outgoing>
     </bpmn:task>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0c15u8y" name="Incident processing?">
+      <bpmn:incoming>SequenceFlow_1xyk9a0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_13j03pg</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1jv7cnv</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0qyx473</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
   </bpmn:process>
   <bpmn:message id="Message_0soekpk" name="Incident_request" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -255,7 +257,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_0c15u8y_di" bpmnElement="ExclusiveGateway_0c15u8y" isMarkerVisible="true">
         <dc:Bounds x="484" y="727" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="479" y="689.5" width="60" height="27" />
+          <dc:Bounds x="479" y="690" width="60" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1xyk9a0_di" bpmnElement="SequenceFlow_1xyk9a0">

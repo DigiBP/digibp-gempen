@@ -18,6 +18,7 @@
         </inputExpression>
       </input>
       <output id="output_1" name="category" typeRef="string" />
+      <output id="OutputClause_02dq9jt" name="language" typeRef="string" />
       <rule id="DecisionRule_115dbdj">
         <inputEntry id="UnaryTests_1wlvc8i">
           <text>&gt;=5</text>
@@ -30,6 +31,9 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_1vptyo3">
           <text>"red"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1mdy9yd">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1x9koeb">
@@ -45,6 +49,9 @@
         <outputEntry id="LiteralExpression_1kihp4c">
           <text>"red"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_0qm1mj0">
+          <text></text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_0kqxsid">
         <inputEntry id="UnaryTests_0kgfrjg">
@@ -58,6 +65,9 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_0tw2bty">
           <text>"yellow"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0hf9cov">
+          <text></text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0n6adv5">
@@ -73,6 +83,9 @@
         <outputEntry id="LiteralExpression_1bjbnps">
           <text>"yellow"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_082x6as">
+          <text></text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_0vs5ls6">
         <inputEntry id="UnaryTests_16e3cq5">
@@ -86,6 +99,9 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_06edxoz">
           <text>"green"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1xsofqe">
+          <text></text>
         </outputEntry>
       </rule>
     </decisionTable>
