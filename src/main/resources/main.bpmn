@@ -30,13 +30,11 @@
         <bpmn:childLaneSet id="LaneSet_0qgpu32" />
       </bpmn:lane>
       <bpmn:lane id="Lane_12k0g4h">
-        <bpmn:flowNodeRef>StartEvent_1qug235</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1k6t5ai</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0l5pq1m</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0c34fym</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0afqw0w</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_119lkhc</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0p2ixwj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1wveuj4</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1phyld0</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1x317c9</bpmn:flowNodeRef>
@@ -50,12 +48,11 @@
         <bpmn:flowNodeRef>Task_1t0qowo</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1qtruxp</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0c15u8y</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0p2ixwj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_057dagt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1qug235</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="StartEvent_1qug235" name="Incident Occurs">
-      <bpmn:outgoing>SequenceFlow_06s8w2h</bpmn:outgoing>
-      <bpmn:messageEventDefinition messageRef="Message_0soekpk" />
-    </bpmn:startEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1k6t5ai" name="Language?">
       <bpmn:incoming>SequenceFlow_1jv7cnv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dw7yt2</bpmn:outgoing>
@@ -70,13 +67,13 @@
     <bpmn:sequenceFlow id="SequenceFlow_06s8w2h" sourceRef="StartEvent_1qug235" targetRef="Task_0p2ixwj" />
     <bpmn:sequenceFlow id="SequenceFlow_1xyk9a0" sourceRef="Task_0p2ixwj" targetRef="ExclusiveGateway_0c15u8y" />
     <bpmn:sequenceFlow id="SequenceFlow_13j03pg" name="high priority" sourceRef="ExclusiveGateway_0c15u8y" targetRef="Task_1wveuj4">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${category=="green"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${incidentlevel=="green"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1jv7cnv" name="low priority" sourceRef="ExclusiveGateway_0c15u8y" targetRef="ExclusiveGateway_1k6t5ai">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${category=="yellow"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${incidentlevel=="yellow"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0qyx473" name="request declined" sourceRef="ExclusiveGateway_0c15u8y" targetRef="EndEvent_0afqw0w">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${category=="red"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${incidentlevel=="red"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1a2pmqo" sourceRef="Task_1wveuj4" targetRef="Task_0kg5mj3" />
     <bpmn:sequenceFlow id="SequenceFlow_1lpk9w8" sourceRef="Task_0kg5mj3" targetRef="Task_0pefmk4" />
@@ -155,19 +152,6 @@
       <bpmn:incoming>SequenceFlow_1h7l3qr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bay6kp</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:businessRuleTask id="Task_0p2ixwj" name="Perform Tirage" camunda:decisionRef="Decision_0pa8gvl">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="role">role</camunda:inputParameter>
-          <camunda:inputParameter name="work_impact">work_impact</camunda:inputParameter>
-          <camunda:inputParameter name="priority">priority</camunda:inputParameter>
-          <camunda:outputParameter name="category">category</camunda:outputParameter>
-          <camunda:outputParameter name="language">language</camunda:outputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_06s8w2h</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1xyk9a0</bpmn:outgoing>
-    </bpmn:businessRuleTask>
     <bpmn:task id="Task_1wveuj4" name="Create Prioritty Ticket">
       <bpmn:incoming>SequenceFlow_13j03pg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1a2pmqo</bpmn:outgoing>
@@ -228,6 +212,57 @@
       <bpmn:outgoing>SequenceFlow_1jv7cnv</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0qyx473</bpmn:outgoing>
     </bpmn:exclusiveGateway>
+    <bpmn:businessRuleTask id="Task_0p2ixwj" name="Perform Tirage" camunda:decisionRef="Decision_0pa8gvl">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="work_impact">work_impact</camunda:inputParameter>
+          <camunda:inputParameter name="hierarchylvl" />
+          <camunda:inputParameter name="presence" />
+          <camunda:inputParameter name="legal" />
+          <camunda:outputParameter name="incidentlevel">incidentlevel</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_06s8w2h</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1xyk9a0</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="Task_057dagt" name="Receive Data">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
+"hierarchylvl":hierarchylvl,
+"work_impact":work_impact,
+"legal":legal,
+"presence":presence});</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="url" />
+            <camunda:outputParameter name="hierarchylvl">
+              <camunda:script scriptFormat="JavaScript">object = JSON.parse(response);
+hierarchylvl = object.hierarchylvl;</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector-start</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1qug235" name="Incident Occurs" camunda:formKey="form">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="hierarchylvl" type="long" />
+          <camunda:formField id="work_impact" type="boolean" />
+          <camunda:formField id="legal" type="boolean" />
+          <camunda:formField id="presence" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_06s8w2h</bpmn:outgoing>
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_0soekpk" name="Incident_request" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -244,15 +279,9 @@
       <bpmndi:BPMNShape id="Participant_0wcjem5_di" bpmnElement="Participant_1rit3x4" isHorizontal="true">
         <dc:Bounds x="639" y="262" width="357" height="92" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1cd3qne_di" bpmnElement="StartEvent_1qug235">
-        <dc:Bounds x="248" y="734" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="228" y="777" width="77" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_06s8w2h_di" bpmnElement="SequenceFlow_06s8w2h">
-        <di:waypoint x="284" y="752" />
-        <di:waypoint x="334" y="752" />
+        <di:waypoint x="250" y="752" />
+        <di:waypoint x="362" y="752" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0c15u8y_di" bpmnElement="ExclusiveGateway_0c15u8y" isMarkerVisible="true">
         <dc:Bounds x="484" y="727" width="50" height="50" />
@@ -261,14 +290,14 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1xyk9a0_di" bpmnElement="SequenceFlow_1xyk9a0">
-        <di:waypoint x="434" y="752" />
+        <di:waypoint x="465" y="752" />
         <di:waypoint x="484" y="752" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_13j03pg_di" bpmnElement="SequenceFlow_13j03pg">
         <di:waypoint x="534" y="752" />
         <di:waypoint x="617" y="752" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="547" y="734" width="57" height="14" />
+          <dc:Bounds x="547" y="734" width="58" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1jv7cnv_di" bpmnElement="SequenceFlow_1jv7cnv">
@@ -304,8 +333,8 @@
         <dc:Bounds x="2127" y="525" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_1eajdkk_di" bpmnElement="MessageFlow_1eajdkk">
-        <di:waypoint x="266" y="173" />
-        <di:waypoint x="266" y="734" />
+        <di:waypoint x="232" y="173" />
+        <di:waypoint x="232" y="734" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0vior9l_di" bpmnElement="SequenceFlow_0vior9l">
         <di:waypoint x="909" y="862" />
@@ -531,7 +560,7 @@
         <dc:Bounds x="187" y="677" width="2911" height="395" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BusinessRuleTask_0obdu2k_di" bpmnElement="Task_0p2ixwj">
-        <dc:Bounds x="334" y="712" width="100" height="80" />
+        <dc:Bounds x="365" y="712" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1ftgnjx_di" bpmnElement="Task_1wveuj4">
         <dc:Bounds x="617" y="712" width="100" height="80" />
@@ -568,6 +597,15 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0oracdj_di" bpmnElement="Task_1qtruxp">
         <dc:Bounds x="1949" y="932" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0ns944v_di" bpmnElement="Task_057dagt">
+        <dc:Bounds x="264" y="854" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_04zqa96_di" bpmnElement="StartEvent_1qug235">
+        <dc:Bounds x="214" y="734" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="127" y="745" width="77" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
