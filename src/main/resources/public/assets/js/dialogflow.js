@@ -1,5 +1,5 @@
 
-	//	var accessToken = "873b57a20abe43f9a13135f3340c62a0"; //IPATESTBOT
+		//var accessToken = "873b57a20abe43f9a13135f3340c62a0"; //IPATESTBOT
 		var accessToken = "5c0daf981b274dbdb8dc7e39eb31f5fd"; //WinMedSupportChatbot
 		var baseUrl = "https://api.api.ai/v1/";
 
