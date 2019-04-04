@@ -1,36 +1,37 @@
 $(document).ready(function() {
 
 var baseUrl = "https://gempen.herokuapp.com";
+var dmnEvaluate = '/rest/decision-definition/key/Decision_0pa8gvl:6:7925ffc0-56ba-11e9-ad77-8aa1d7eb306b/evaluate';
+
+    
 
   $("#sendRequest").on("click", function(){
 
-
-
+    $.ajax({
+  method: "POST",
+  url: baseUrl + dmnEvaluate,
+  data: { variables: { priority: {value:3, type:"long"}}},
+  success: function(data){
+    alert("success");
+    console.log(data);
+  }
+});
+/*
     $.ajax({
 				type: "POST",
-				url: baseUrl + "query?v=20150910",
+				url: baseUrl + dmnEvaluate,
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
-				headers: {
-					"Authorization": "Bearer " + accessToken
-				},
-				data: JSON.stringify({ query: "hi", lang: "en", sessionId: "somerandomthing" }),
+
+				data: JSON.stringify({ variables: { priority: {value:3, type:"long"}}}),
 
 				success: function(data) {
           alert(data);
-				/*	setResponse(JSON.stringify(data, undefined, 2));
-					setResponseText(data, messageContainer);
-          */
-				},
-				error: function() {
-          alert("error");
-          /*
-					messageContainer.find("div").empty();
-					messageContainer.find("div").append("<p>Internal Server Error</p>");
-					setResponse("Internal Server Error");
-          */
+
 				}
 
-  });
+      });//end ajax
+*/
+  }); //end event handler
 
-});
+});// end document ready
