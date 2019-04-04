@@ -22,7 +22,7 @@
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
 
-  <!--  <link href="css/chat.css" rel="stylesheet"> -->
+    <link href="assets/css/chat.css" rel="stylesheet">
 
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
@@ -40,10 +40,11 @@
 
     <div class="container">
 
-      <div class="row">
+      <div class="row" id="startForm">
           <div class="col-md-12">
 
             <h1>Welcome to the support area</h1>
+            <p>Please provide us with some information to your request</p>
             <form>
               <div class="form-group">
                 <label for="name">Name</label>
@@ -52,12 +53,14 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Severenty</label>
-                <input type="select"  >
+
                 <select class="form-control" id="severenty">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                    <option value="5">5</option>
+                      <option value="6">6</option>
                 </select>
               </div>
 
@@ -70,55 +73,51 @@
         <!--<h1>Chatbot WebClient</h1>-->
 
 
+        <div id="highPrio" class="hidden">
+          		<div class="row ">
+          			<div class="col-md-12">
+                  <h2>Thank you for your request, someone from Support will call you back ASAP.</h2>
+                  </div>
+                </div>
+            </div>
 
-		<div class="row hidden">
-			<div class="col-md-4">
-				<div class="panel panel-default">
-				  <div class="panel-heading">
-					<h3 class="panel-title"><b>Mögliche Fragen</b></h3>
-				  </div>
-				  <div class="panel-body example-questions">
-					Wie kann man einen Rechnungslauf starten?<br/>
-					Was ist Mediport?<br/>
-					Wie erstellt man eine Statistik?<br/>
-				  </div>
-				</div>
-				<div class="panel panel-default">
-				  <div class="panel-heading">
-					<h3 class="panel-title"><b>Kontakt</b></h3>
-				  </div>
-				  <div class="panel-body">
-					<h4 class="mb-sm">Telefon</h4>
-					<p class="font-size-lg">
-						<a href="tel:+41619569920">+41 (0)61 956 99 20</a> <br> <i>Mo.
-						- Fr.:<br> 08:00 - 12:00 Uhr <br> 13:30 - 17:00 Uhr
-						</i>
-					</p>
-				  </div>
-				</div>
-			</div>
-			<div class="col-md-8 table-responsive">
-				<table class="table" id="responseTable">
-					<tbody>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="row hidden">
-			<div class="col-md-4">
-			</div>
-			<div class="col-md-8">
-				<form class="form" action="#">
-				    <div class="input-group">
-					  <input type="text" class="form-control" id="input" placeholder="Text eingeben um zu chatten..." autocomplete="off">
-					  <span class="input-group-btn">
-						<button class="btn btn-default"  id="send">Senden</button>
-					  </span>
-					</div>
-				</form>
-			</div>
-		</div>
+<div id="chatbot" class="hidden">
+  		<div class="row ">
+  			<div class="col-md-4">
+  				<div class="panel panel-default">
+  				  <div class="panel-heading">
+  					<h3 class="panel-title"><b>Information</b></h3>
+  				  </div>
+  				  <div class="panel-body example-questions">
+  					User: <span id="userNameSpan"></span><br/>
+  				Severenty: <span id="severentySpan"></span><br/>
 
+  				  </div>
+  				</div>
+
+  			</div>
+  			<div class="col-md-8 table-responsive">
+  				<table class="table" id="responseTable">
+  					<tbody>
+  					</tbody>
+  				</table>
+  			</div>
+  		</div>
+  		<div class="row ">
+  			<div class="col-md-4">
+  			</div>
+  			<div class="col-md-8">
+  				<form class="form" action="#">
+  				    <div class="input-group">
+  					  <input type="text" class="form-control" id="input" placeholder="Text eingeben um zu chatten..." autocomplete="off">
+  					  <span class="input-group-btn">
+  						<button class="btn btn-default"  id="send">Senden</button>
+  					  </span>
+  					</div>
+  				</form>
+  			</div>
+  		</div>
+    </div>
 		<div class="row hidden">
 		<br>Response<br> <textarea id="response" cols="140" rows="20"></textarea>
 		</div>

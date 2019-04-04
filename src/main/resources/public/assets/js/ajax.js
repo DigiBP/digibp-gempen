@@ -6,10 +6,12 @@ var dmnEvaluate =  '/rest/decision-definition/Decision_08ginzr_test:5:79264de1-5
 
   $("#sendRequest").on("click", function(){
 
+    var userName = $("#employeeName").val();
+    var severenty = $("#severenty :selected").val();
     var requestBody = {
       variables : {
           priority: {
-            value:3,
+            value:severenty,
             type: "long"
           }
         }
@@ -17,32 +19,24 @@ var dmnEvaluate =  '/rest/decision-definition/Decision_08ginzr_test:5:79264de1-5
 
 
     $.ajax({
-  method: "POST",
-  url: baseUrl + dmnEvaluate,
-  contentType: "application/json; charset=utf-8",
+      method: "POST",
+      url: baseUrl + dmnEvaluate,
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify(requestBody),
+      success: function(data){
+        console.log(data);
+        if(data[0].incidentLevel.value == "low"){
 
-  data: JSON.stringify(requestBody),
-  success: function(data){
-    alert("success");
-    console.log(data);
-  }
-});
-/*
-    $.ajax({
-				type: "POST",
-				url: baseUrl + dmnEvaluate,
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
+          $("#userNameSpan").text(userName);
+          $("#severentySpan").text(severenty);
+          $("#chatbot").removeClass("hidden");
+          $("#startForm").addClass("hidden");
+        }else{
+            $("#highPrio").removeClass("hidden");
+            $("#startForm").addClass("hidden");
+        }
+      }
+    });
 
-				data: JSON.stringify({ variables: { priority: {value:3, type:"long"}}}),
-
-				success: function(data) {
-          alert(data);
-
-				}
-
-      });//end ajax
-*/
-  }); //end event handler
-
-});// end document ready
+  }); //End event handler
+});//end on document ready
