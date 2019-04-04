@@ -1,16 +1,27 @@
 $(document).ready(function() {
 
 var baseUrl = "https://gempen.herokuapp.com";
-var dmnEvaluate = '/rest/decision-definition/key/Decision_0pa8gvl:6:7925ffc0-56ba-11e9-ad77-8aa1d7eb306b/evaluate';
+var dmnEvaluate =  '/rest/decision-definition/Decision_08ginzr_test:5:79264de1-56ba-11e9-ad77-8aa1d7eb306b/evaluate';
 
-    
 
   $("#sendRequest").on("click", function(){
+
+    var requestBody = {
+      variables : {
+          priority: {
+            value:3,
+            type: "long"
+          }
+        }
+      };
+
 
     $.ajax({
   method: "POST",
   url: baseUrl + dmnEvaluate,
-  data: { variables: { priority: {value:3, type:"long"}}},
+  contentType: "application/json; charset=utf-8",
+
+  data: JSON.stringify(requestBody),
   success: function(data){
     alert("success");
     console.log(data);
