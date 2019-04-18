@@ -14,7 +14,8 @@ function getCamundaManagerInstance() {
 function CamundaManager(){
   //constance
   this.BASE_CAMUNDA_URL = "https://gempen.herokuapp.com/rest/";
-  this.PROCESS_DEFINITION_ID = "test_process:24:cc280bdb-5c31-11e9-8025-6e16e9d4eabd";
+//  this.PROCESS_DEFINITION_ID = "test_process:24:cc280bdb-5c31-11e9-8025-6e16e9d4eabd";
+  this.PROCESS_DEFINITION_ID = "";
   //global variables
   this.ajaxHelper = new AjaxHelper(this.BASE_CAMUNDA_URL);
   console.log(this.ajaxHelper);
@@ -26,10 +27,16 @@ function CamundaManager(){
 
 }
 
-CamundaManager.prototype.startProcess = function(){
+
+CamundaManager.prototype.startProcess = function(processKey, businessKey){
     var _this = this;
     var requestURL = "process-definition/"+_this.PROCESS_DEFINITION_ID+"/start";
 
+    if(businessKey == undefined)
+    {
+      businessKey = "bKey";
+
+    }
     var requestBody =     {
                           "variables":
                             {
@@ -38,16 +45,25 @@ CamundaManager.prototype.startProcess = function(){
                               "anotherVariable" :
                                           {"value" : true, "type": "Boolean"}
                              },
-                            "businessKey" : "myBusinessKey"
+                            "businessKey" : businessKey
                           };
 
 
+      //get latest process definition first!
+      var requestURLProcess = "process-definition?key="+processKey+"&latestVersion=true";
+      _this.ajaxHelper.getData(requestURLProcess, function(response){
+                            //set process definition (which process should be triggered)
+                            _this.PROCESS_DEFINITION_ID = response[0].id;
 
-    console.log(_this);
-    _this.ajaxHelper.postData(requestURL, requestBody, function(response){
-        console.log(response);
-        _this.processInstanceID =  response.id;
-    });
+                              //starts the lates process definition
+                            _this.ajaxHelper.postData(requestURL, requestBody, function(response){
+                                      console.log(response);
+                                      _this.processInstanceID =  response.id;
+                              });
+
+          });
+
+
 
 
 }

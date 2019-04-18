@@ -49,6 +49,9 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
   $("#startFormBtn").on("click", function(){
 
+    //start new process instance in camunda
+    _this.$camundaManager.startProcess("test_process");
+
     var userName = $("#employeeName").val();
     var hirarchyLevel = _this.getUserHirarchy(userName);
      var preventWork = $("input[name='preventWork']:checked").val();
@@ -82,59 +85,72 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
         }
       };
 
-    //  const dmnID = "Decision_0pa8gvl:23:3f40bd1c-61db-11e9-8454-3e7b74bbc4b0";
+      //const dmnID = "Decision_0pa8gvl:23:3f40bd1c-61db-11e9-8454-3e7b74bbc4b0";
       const dmnID = "key/Decision_0pa8gvl";
       _this.$camundaManager.evaluateDMN(dmnID,requestBody, function(response){
 
          console.log("response from callback:");
          console.log(response);
          console.log("----");
-         var incidentLevel = "low";
+         var incidentLevel = "green";
          if(response.length > 0){
            incidentLevel = response[0].incidentlevel.value;
          }
-         alert("incident level: "+ incidentLevel);
-         if(incidentLevel == "low"){
 
-           $(".userNameSpan").text(userName);
-           $(".severentySpan").text(incidentLevel);
+         alert("incident level: "+ incidentLevel);
+         $(".userNameSpan").text(userName);
+         $(".severentySpan").text(incidentLevel);
+
+         if(incidentLevel == "red"  ){
+           incidentLevel = "high";
+           $("#highPrioForm").removeClass("hidden");
+           $("#startForm").addClass("hidden");
+
+         }else{
+           incidentLevel = "low";
            $("#chatbot").removeClass("hidden");
            $("#startForm").addClass("hidden");
-         }else{
-             $("#highPrioForm").removeClass("hidden");
-             $("#startForm").addClass("hidden");
          }
+
+         var requestBody = {"variables":
+                             {"incidentLevel":
+                               {"value": incidentLevel, "type": "string"}
+                             }
+                           };
+
+         _this.$camundaManager.completeNextTask(requestBody);
+
        });
 
   });
   /*
-  $("#testComplete").on("click", function(){
+    $("#testComplete").on("click", function(){
 
-    console.log("testComplete clicked!");
-    var requestBody = {"variables":
-                        {"incidentLevel":
-                          {"value": "high", "type": "string"}
-                        }
-                      };
+      console.log("testComplete clicked!");
+      var requestBody = {"variables":
+                          {"incidentLevel":
+                            {"value": "high", "type": "string"}
+                          }
+                        };
 
-    _this.$camundaManager.completeNextTask(requestBody);
-  });
-
-
-  $("#sendRequest").on("click", function(){
-
-    var dmnID = "Decision_08ginzr_test:5:79264de1-56ba-11e9-ad77-8aa1d7eb306b";
-    var requestBody = {"variables":
-                         {"priority" :
-                          { "value" : 2, "type" : "long" }
-                        }
-                      };
-
-    _this.$camundaManager.evaluateDMN(dmnID,requestBody, function(){
-       alert("callback fired!");
+      _this.$camundaManager.completeNextTask(requestBody);
     });
 
-  });
+
+    $("#sendRequest").on("click", function(){
+
+      var dmnID = "Decision_08ginzr_test:5:79264de1-56ba-11e9-ad77-8aa1d7eb306b";
+      var requestBody = {"variables":
+                           {"priority" :
+                            { "value" : 2, "type" : "long" }
+                          }
+                        };
+
+      _this.$camundaManager.evaluateDMN(dmnID,requestBody, function(){
+         alert("callback fired!");
+      });
+
+    });
   */
 
 
