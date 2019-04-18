@@ -89,16 +89,19 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          console.log("response from callback:");
          console.log(response);
          console.log("----");
-         var incidentLevel = response[0].incidentlevel.value;
+         var incidentLevel = "low";
+         if(response != undefined){
+           response[0].incidentlevel.value;
+         }
          alert("incident level: "+ incidentLevel);
          if(incidentLevel == "low"){
 
-           $("#userNameSpan").text(userName);
-           $("#severentySpan").text(incidentLevel);
+           $(".userNameSpan").text(userName);
+           $(".severentySpan").text(incidentLevel);
            $("#chatbot").removeClass("hidden");
            $("#startForm").addClass("hidden");
          }else{
-             $("#highPrio").removeClass("hidden");
+             $("#highPrioForm").removeClass("hidden");
              $("#startForm").addClass("hidden");
          }
        });

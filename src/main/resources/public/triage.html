@@ -22,6 +22,7 @@
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
 
+<link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/chat.css" rel="stylesheet">
 
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -82,45 +83,96 @@
           </div>
         </div>
 
-<div id="chatbot" class="hidden">
-  		<div class="row ">
-  			<div class="col-md-4">
-  				<div class="panel panel-default">
-  				  <div class="panel-heading">
-  					<h3 class="panel-title"><b>Information</b></h3>
-  				  </div>
-  				  <div class="panel-body example-questions">
-  					User: <span id="userNameSpan"></span><br/>
-  				Severenty: <span id="severentySpan"></span><br/>
 
-  				  </div>
-  				</div>
+        <!---high priority Form-->
+        <div  id="highPrioForm" class="row hidden">
 
-  			</div>
-  			<div class="col-md-8 table-responsive">
-  				<table class="table" id="responseTable">
-  					<tbody>
-  					</tbody>
-  				</table>
-  			</div>
-  		</div>
-  		<div class="row ">
-  			<div class="col-md-4">
-  			</div>
-  			<div class="col-md-8">
 
-  				<form class="form" action="#">
-  				    <div class="input-group">
-  					  <input type="text" class="form-control" id="input" placeholder="Text eingeben um zu chatten..." autocomplete="off">
-  					  <span class="input-group-btn">
-  						<button class="btn btn-default"  id="send">Senden</button>
+                    <div class="row mb-xl">
+                      <div class="col-md-12">
+                            <h2>Priority Support</h2>
+                          <span> You are qualified for priority support. Please provide us with your request. We will call you back as soon as possible</span>
+                      </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-4">
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                            <h3 class="panel-title"><b>Information</b></h3>
+                            </div>
+                            <div class="panel-body example-questions">
+                            User: <span class="userNameSpan"></span><br/>
+                          Severenty: <span class="severentySpan"></span><br/>
 
-  					  </span>
-  					</div>
-  				</form>
-  			</div>
-  		</div>
-    </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-md-8">
+
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                            <h3 class="panel-title"><b>Your Request:</b></h3>
+                            </div>
+                            <div class="panel-body example-questions">
+                          <div class="form-group">
+
+                          <textarea class="form-control" rows="5" id="highPrioRequest"></textarea>
+                          </div>
+
+                            <input type="button" id="prioFormButton" value="Send request">
+                          </div>
+                        </div>
+                        </div>
+              </div>
+            </div><!--//END-high priority Form-->
+
+<!---chatbot-->
+      <div id="chatbot" class="row hidden">
+        <div class="row mb-xl">
+          <div class="col-md-12">
+                <h2>Chatbot Support</h2>
+              <span> Please ask the chatbot for help. If you can not find an answer, you can create a ticket later.</span>
+          </div>
+        </div>
+        		<div class="row ">
+        			<div class="col-md-4">
+        				<div class="panel panel-default">
+        				  <div class="panel-heading">
+        					<h3 class="panel-title"><b>Information</b></h3>
+        				  </div>
+        				  <div class="panel-body example-questions">
+        					User: <span class="userNameSpan"></span><br/>
+        				Severenty: <span class="severentySpan"></span><br/>
+
+        				  </div>
+        				</div>
+
+        			</div>
+        			<div class="col-md-8 table-responsive">
+        				<table class="table" id="responseTable">
+        					<tbody>
+        					</tbody>
+        				</table>
+        			</div>
+        		</div>
+        		<div class="row ">
+        			<div class="col-md-4">
+        			</div>
+        			<div class="col-md-8">
+
+        				<form class="form" action="#">
+        				    <div class="input-group">
+        					  <input type="text" class="form-control" id="input" placeholder="Text eingeben um zu chatten..." autocomplete="off">
+        					  <span class="input-group-btn">
+        						<button class="btn btn-default"  id="send">Senden</button>
+
+        					  </span>
+        					</div>
+        				</form>
+        			</div>
+        		</div>
+          </div><!---END chatbot-->
 		<div class="row hidden">
 		<br>Response<br> <textarea id="response" cols="140" rows="20"></textarea>
 		</div>
