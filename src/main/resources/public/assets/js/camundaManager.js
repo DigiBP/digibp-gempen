@@ -102,3 +102,14 @@ CamundaManager.prototype.completeTaskByID = function(taskID, requestBody){
 
       return false;
 }
+
+CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
+  var _this  = this;
+  var requestURL =  'rest/decision-definition/'+dmnID+'/evaluate';
+
+  _this.ajaxHelper.postData(requestURL, requestBody, function(response) {
+      console.log(response);
+      callback();
+  });
+
+}
