@@ -40,9 +40,9 @@ CamundaManager.prototype.startProcess = function(processKey, businessKey, callba
     var requestBody =     {
                           "variables":
                             {
-                              "aVariable" :
-                                          { "value" : "aStringValue", "type": "String"},
-                              "anotherVariable" :
+                              "incidentLevel" :
+                                          { "value" : " ", "type": "String"},
+                              "newKB" :
                                           {"value" : true, "type": "Boolean"}
                              },
                             "businessKey" : businessKey
