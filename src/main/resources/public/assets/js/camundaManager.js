@@ -22,7 +22,7 @@ function CamundaManager(){
 
   //start
 
-  this.startProcess();
+//  this.startProcess();
 
 }
 

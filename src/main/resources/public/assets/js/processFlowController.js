@@ -82,12 +82,25 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
         }
       };
 
-      const dmnID = "Decision_0pa8gvl:23:3f40bd1c-61db-11e9-8454-3e7b74bbc4b0";
+    //  const dmnID = "Decision_0pa8gvl:23:3f40bd1c-61db-11e9-8454-3e7b74bbc4b0";
+      const dmnID = "key/Decision_0pa8gvl";
       _this.$camundaManager.evaluateDMN(dmnID,requestBody, function(response){
-         alert("callback fired!");
+
          console.log("response from callback:");
          console.log(response);
          console.log("----");
+         var incidentLevel = response[0].incidentLevel.value;
+         alert("incident level: "+ incidentLevel);
+         if(incidentLevel == "low"){
+
+           $("#userNameSpan").text(userName);
+           $("#severentySpan").text(incidentLevel);
+           $("#chatbot").removeClass("hidden");
+           $("#startForm").addClass("hidden");
+         }else{
+             $("#highPrio").removeClass("hidden");
+             $("#startForm").addClass("hidden");
+         }
        });
 
   });
