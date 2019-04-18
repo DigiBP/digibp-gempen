@@ -58,15 +58,17 @@ CamundaManager.prototype.startProcess = function(){
 CamundaManager.prototype.completeNextTask = function(requestBody){
       var _this = this;
       console.log("processInstanceID: " +_this.processInstanceID);
+
       //get open Task list for processInstance first to retrieve ID of task to complete!(should always return only one task)
       function getOpenTaskList(){
-
+          var openTaskList = [];
         var requestURL = "task/?processInstanceId="+_this.processInstanceID;
         _this.ajaxHelper.getData(requestURL, function(response){
 
             console.log(response);
-            return response;
+            openTaskList = response;
           });
+          return openTaskList;
       }
 
       var openTaskList = getOpenTaskList();
