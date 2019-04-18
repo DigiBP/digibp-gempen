@@ -90,8 +90,8 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          console.log(response);
          console.log("----");
          var incidentLevel = "low";
-         if(response != undefined){
-           response[0].incidentlevel.value;
+         if(response.length > 0){
+           incidentLevel = response[0].incidentlevel.value;
          }
          alert("incident level: "+ incidentLevel);
          if(incidentLevel == "low"){
