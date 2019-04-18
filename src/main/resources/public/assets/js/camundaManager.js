@@ -1,7 +1,4 @@
-/*on document ready*/
-$( function() {
-	var $camundaManager = getCamundaManagerInstance();
-});
+
 
 /*Singleton*/
 var $camundaManager = null;
