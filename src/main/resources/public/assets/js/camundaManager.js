@@ -28,7 +28,7 @@ function CamundaManager(){
 }
 
 
-CamundaManager.prototype.startProcess = function(processKey, businessKey){
+CamundaManager.prototype.startProcess = function(processKey, businessKey, callback){
     var _this = this;
     var requestURL = "process-definition/"+_this.PROCESS_DEFINITION_ID+"/start";
 
@@ -59,6 +59,7 @@ CamundaManager.prototype.startProcess = function(processKey, businessKey){
                             _this.ajaxHelper.postData(requestURL, requestBody, function(response){
                                       console.log(response);
                                       _this.processInstanceID =  response.id;
+                                      callback();
                               });
 
           });

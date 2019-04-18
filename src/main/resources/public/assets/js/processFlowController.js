@@ -50,7 +50,14 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
   $("#startFormBtn").on("click", function(){
 
     //start new process instance in camunda
-    _this.$camundaManager.startProcess("incident_process_2");
+    _this.$camundaManager.startProcess("incident_process_2", "bkey", _this.triggerIncidentProcess);
+
+
+
+  });
+
+
+  ProcessFlowController.prototype.triggerIncidentProcess = function(){
 
     var userName = $("#employeeName").val();
     var hirarchyLevel = _this.getUserHirarchy(userName);
@@ -121,8 +128,8 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          _this.$camundaManager.completeNextTask(requestBody);
 
        });
+  }
 
-  });
   /*
     $("#testComplete").on("click", function(){
 
