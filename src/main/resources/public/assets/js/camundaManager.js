@@ -105,7 +105,7 @@ CamundaManager.prototype.completeTaskByID = function(taskID, requestBody){
 
 CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
   var _this  = this;
-  var requestURL =  'rest/decision-definition/'+dmnID+'/evaluate';
+  var requestURL = 'decision-definition/'+dmnID+'/evaluate';
 
   _this.ajaxHelper.postData(requestURL, requestBody, function(response) {
       console.log(response);
