@@ -30,8 +30,8 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
   $("#testComplete").on("click", function(){
     console.log("testComplete clicked!");
     var requestBody = {"variables":
-                        {"priority":
-                          {"incidentLevel": "high", "type": "string"}
+                        {"incidentLevel":
+                          {"value": "high", "type": "string"}
                         }
                       };
 
