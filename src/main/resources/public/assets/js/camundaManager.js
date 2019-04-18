@@ -45,8 +45,60 @@ CamundaManager.prototype.startProcess = function(){
     console.log(_this);
     _this.ajaxHelper.postData(requestURL, requestBody, function(response){
         console.log(response);
-        processInstanceID = response.definitionId;
+        processInstanceID = response.id;
     });
 
     return processInstanceID;
+}
+
+CamundaManager.prototype.completeNextTask = function(requestBody){
+      var _this = this;
+
+      //get open Task list for processInstance first to retrieve ID of task to complete!(should always return only one task)
+      function getOpenTaskList(){
+
+        var requestURL = "task/?processInstanceId="+_this.processInstanceID;
+        _this.ajaxHelper.getData(requestURL, function(response){
+
+            console.log(response);
+            return response;
+          });
+      }
+
+      var openTaskList = getOpenTaskList();
+      var taskIDtoComplete = openTaskList[0].id;
+      //complete open task
+
+      var completed = _this.completeTaskByID(taskIDtoComplete,requestBody);
+
+      if(completed){
+        alert("hurray");
+      }else{
+        alert("failed to complete...");
+      }
+
+      return comleted;
+}
+
+CamundaManager.prototype.completeTaskByID = function(taskID, requestBody){
+      var _this = this;
+
+      //complete open task
+      var requestURL = "task/"+taskID+"/complete";
+      if(requestBody == undefined){
+          //dummy request body
+          requestBody = {
+                            "variables":
+                              {"sample":
+                                {"value": "0", "type": "long"}
+                              }
+                          };
+      }
+
+      _this.ajaxHelper.postData(requestURL, requestBody, function(response) {
+          console.log(response);
+          return true;
+      });
+
+      return false;
 }
