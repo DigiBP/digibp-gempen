@@ -50,7 +50,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
   $("#startFormBtn").on("click", function(){
 
     //start new process instance in camunda
-    _this.$camundaManager.startProcess("test_process");
+    _this.$camundaManager.startProcess("incident_process_2");
 
     var userName = $("#employeeName").val();
     var hirarchyLevel = _this.getUserHirarchy(userName);
