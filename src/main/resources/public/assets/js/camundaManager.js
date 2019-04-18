@@ -30,7 +30,7 @@ function CamundaManager(){
 
 CamundaManager.prototype.startProcess = function(processKey, businessKey, callback){
     var _this = this;
-    var requestURL = "process-definition/"+_this.PROCESS_DEFINITION_ID+"/start";
+
 
     if(businessKey == undefined)
     {
@@ -55,6 +55,7 @@ CamundaManager.prototype.startProcess = function(processKey, businessKey, callba
                             //set process definition (which process should be triggered)
                             _this.PROCESS_DEFINITION_ID = response[0].id;
 
+                            var requestURL = "process-definition/"+_this.PROCESS_DEFINITION_ID+"/start";
                               //starts the lates process definition
                             _this.ajaxHelper.postData(requestURL, requestBody, function(response){
                                       console.log(response);
