@@ -109,7 +109,7 @@ CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
 
   _this.ajaxHelper.postData(requestURL, requestBody, function(response) {
       console.log(response);
-      callback();
+      callback(response);
   });
 
 }

@@ -15,7 +15,7 @@ AjaxHelper.prototype.getData = function(action,handler) {
 		  method: "GET",
       contentType: "application/json; charset=utf-8",
 		  success: handler,
-      error: function(){ console.log("error in post request")}
+      error:function(response){ console.log("error in GET request"); console.log(response);}
 		});
 }
 
@@ -30,7 +30,7 @@ AjaxHelper.prototype.postData = function(action,requestBody,handler) {
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify(requestBody),
     success: handler,
-    error: function(){ console.log("error in post request")}
+    error: function(response){ console.log("error in POST request"); console.log(response);}
 		});
 }
 

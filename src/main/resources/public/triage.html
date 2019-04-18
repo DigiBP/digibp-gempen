@@ -52,35 +52,35 @@
                 <small id="nameHelp" class="form-text text-muted">Please provide your name that we can identify your request.</small>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Severenty</label>
+                <label for="language">You're Language</label>
 
-                <select class="form-control" id="severenty">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                    <option value="5">5</option>
-                      <option value="6">6</option>
+                <select class="form-control" id="language">
+                  <option value="EN">EN</option>
+                  <option value="DE">DE</option>
+
                 </select>
               </div>
 
-              <button type="button" class="btn btn-primary" id="sendRequest">Submit</button>
-                <input  type="button"  class="btn btn-default"  id="testComplete" value="complete">
+              <div class="form-group">
+                <label for="preventWork">Does it prevent you from work?</label>
+                <label class="radio-inline"><input type="radio" value="true" name="preventWork" checked>Yes</label>
+                <label class="radio-inline"><input type="radio" value="false" name="preventWork">No</label>
+              </div>
+              <div class="form-group">
+                <label for="onSite">Are you on site?</label>
+                <label class="radio-inline"><input type="radio" value="true" name="onSite" checked>Yes</label>
+                <label class="radio-inline"><input type="radio" value="false"  name="onSite">No</label>
+              </div>
+              <div class="form-group">
+                <label for="voulnerable">Is it making the process vulnerable?</label>
+                <label class="radio-inline"><input type="radio" value="true" name="voulnerable" checked>Yes</label>
+                <label class="radio-inline"><input type="radio" value="false"  name="voulnerable">No</label>
+              </div>
+
+              <input type="button" class="btn btn-default" id="startFormBtn" value="Request Help!">
             </form>
-            </div>
+          </div>
         </div>
-
-      <div class="starter-template ">
-        <!--<h1>Chatbot WebClient</h1>-->
-
-
-        <div id="highPrio" class="hidden">
-          		<div class="row ">
-          			<div class="col-md-12">
-                  <h2>Thank you for your request, someone from Support will call you back ASAP.</h2>
-                  </div>
-                </div>
-            </div>
 
 <div id="chatbot" class="hidden">
   		<div class="row ">
