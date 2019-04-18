@@ -15,13 +15,17 @@ function getCamundaManagerInstance() {
 
 //CamundaManager Class
 function CamundaManager(){
-
+  //constance
   this.BASE_CAMUNDA_URL = "https://gempen.herokuapp.com/rest/";
   this.PROCESS_DEFINITION_ID = "test_process:24:cc280bdb-5c31-11e9-8025-6e16e9d4eabd";
-
+  //global variables
   this.ajaxHelper = new AjaxHelper(this.BASE_CAMUNDA_URL);
   console.log(this.ajaxHelper);
-  this.processInstanceID = this.startProcess();
+  this.processInstanceID = 0;
+
+  //start
+
+  this.startProcess();
 
 }
 
@@ -45,7 +49,7 @@ CamundaManager.prototype.startProcess = function(){
     console.log(_this);
     _this.ajaxHelper.postData(requestURL, requestBody, function(response){
         console.log(response);
-        return  response.id;
+        _this.processInstanceID =  response.id;
     });
 
 
