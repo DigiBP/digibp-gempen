@@ -45,7 +45,7 @@ CamundaManager.prototype.startProcess = function(){
     console.log(_this);
     _this.ajaxHelper.postData(requestURL, requestBody, function(response){
         console.log(response);
-        return = response.id;
+        return  response.id;
     });
 
 
