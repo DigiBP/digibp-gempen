@@ -179,7 +179,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
       var userInfos = _this.getUserInstanceVariables();
         var processVariables = {
 
-
+                        "v_incident_number" : {"value" :  $processFlowController.businessKey, "type": "String" } ,
                         "v_priorization" : {"value" : prio, "type": "String"},
                         "v_user_name" : {"value" : userInfos.userName, "type": "String"},
                         "v_user_hierarchy_lvl" : {"value" :  userInfos.hirarchyLevel, "type": "String"},

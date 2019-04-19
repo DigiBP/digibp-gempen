@@ -141,7 +141,7 @@
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
-
+       "incident_number": v_incident_number,
       "priorization": v_priorization,
 	"user_name": v_user_name,
 	"user_hierarchy_lvl": v_user_hierarchy_lvl,
@@ -202,6 +202,7 @@
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
 
+"incident_number": v_incident_number,
       "priorization": v_priorization,
 	"user_name": v_user_name,
 	"user_hierarchy_lvl": v_user_hierarchy_lvl,
@@ -239,7 +240,7 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
-
+"incident_number": v_incident_number,
       "priorization": v_priorization,
 	"user_name": v_user_name,
 	"user_hierarchy_lvl": v_user_hierarchy_lvl,
