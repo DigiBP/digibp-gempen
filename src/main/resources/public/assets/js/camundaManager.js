@@ -126,3 +126,31 @@ CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
   });
 
 }
+
+CamundaManager.prototype.createTicket = function(postback){
+    var _this = this;
+/*
+    if(postback == "create_ticket"){
+
+    }else if(postback == "problem_solved")
+    {
+
+    }
+    //send msg to waiting catching msg event
+    var requestURL = "message;
+
+
+        requestBody = {
+                          "variables":
+                            {"sample":
+                              {"value": "0", "type": "long"}
+                            }
+                        };
+    }
+
+    _this.ajaxHelper.postData(requestURL, requestBody, function(response) {
+          console.log("task completed");
+    });
+
+*/
+}

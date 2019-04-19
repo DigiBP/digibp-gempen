@@ -93,6 +93,10 @@
 			var postback = $(this).attr("data-postback");
 			console.log(postback);
 			send(postback);
+
+			$camundaManager.createTicket(postback);
+			
+
 		}
 
 		function send(text) {
@@ -233,12 +237,12 @@
 				//buttons
 
 				if(element.payload.buttons == undefined) {
-					var button = "<button class='btn btn-primary' data-postback="+element.payload.postback+">"+element.payload.text+"</button>";
+					var button = "<button class='btn btn-primary dialogflow-control-btn' data-postback="+element.payload.postback+">"+element.payload.text+"</button>";
 					return $(button);
 				} else {
 					var buttons = element.payload.buttons;
 					$(buttons).each(function(index,element){
-						var btnEl = $("<button class='btn btn-primary' data-postback="+element.postback+">"+element.text+"</button>");
+						var btnEl = $("<button class='btn btn-primary dialogflow-control-btn' data-postback="+element.postback+">"+element.text+"</button>");
 
 						btnEl.click(sendBtn);
 
