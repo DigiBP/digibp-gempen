@@ -128,7 +128,7 @@ CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
 }
 
 CamundaManager.prototype.sendMessage = function(msgName, variables, callback){
-
+  var _this  = this;
   //send msg to waiting catching msg event
   var requestURLResource = "message";
   var  requestBody =     {

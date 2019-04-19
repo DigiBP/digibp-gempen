@@ -59,7 +59,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
   $("#prioFormButton").on("click", function(){
 
-    _this.$camundaManager.createTicket("create_prio_ticket");
+    $processFlowController.createTicket("create_prio_ticket");
   });
 
 
