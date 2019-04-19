@@ -34,7 +34,7 @@ CamundaManager.prototype.startProcess = function(processKey, businessKey, callba
 
     if(businessKey == undefined)
     {
-      businessKey = "bKey";
+      businessKey = guid();
 
     }
     var requestBody =     {
@@ -133,15 +133,24 @@ CamundaManager.prototype.sendMessage = function(msgName, processVariables, callb
   var requestURLResource = "message";
   var  requestBody =     {
             "messageName" : msgName,
-            "businessKey" : "bkey",
+            "businessKey" : $processFlowController.businessKey,
             "processInstanceId": _this.processInstanceID,
             processVariables
           };
 
   _this.ajaxHelper.postData(requestURLResource, requestBody, function(response) {
         console.log("msg sent");
+
+
         if(callback != undefined){
           callback();
+        }
+
+        if(response != undefined)
+        {
+          if(response.type == "RestException"){
+            alert("You have already opened a ticket!");
+          }
         }
   });
 

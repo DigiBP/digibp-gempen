@@ -18,6 +18,7 @@ function ProcessFlowController(){
 
   this.$camundaManager = new getCamundaManagerInstance();
 
+  this.businessKey = guid();
   this.registerEventHandlers();
 
 
@@ -51,7 +52,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
   $("#startFormBtn").on("click", function(){
 
     //start new process instance in camunda
-    _this.$camundaManager.startProcess("incident_process_2", "bkey", _this.triggerIncidentProcess);
+    _this.$camundaManager.startProcess("incident_process_2", _this.businessKey, _this.triggerIncidentProcess);
 
 
 
@@ -185,7 +186,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
                         "v_email" : {"value" : userInfos.email, "type": "String"},
                         "v_content" : {"value" : content, "type": "String"},
                         "v_current_status" : {"value" : currentStatus, "type": "String"}
-                      
+
                     };
 
           _this.$camundaManager.sendMessage(msgName,processVariables, function(){alert("Ticket created! Messagename: "+msgName)});

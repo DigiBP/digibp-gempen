@@ -268,7 +268,7 @@
 
 		function getAllUserRequests(){
 
-				var userRequests = "USER REQUESTS:  ";
+				var userRequests = "Chat content:  ";
 			$( ".user-request" ).each(function( index , element) {
 
 					var elText = 	$(element);

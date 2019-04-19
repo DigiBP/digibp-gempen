@@ -39,10 +39,6 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0ai2ffl" sourceRef="Task_15f2bp7" targetRef="Task_015nn46" />
     <bpmn:sequenceFlow id="SequenceFlow_1444308" sourceRef="ExclusiveGateway_0q41gzf" targetRef="EndEvent_16d7ica" />
-    <bpmn:userTask id="Task_01v81zj" name="collect data">
-      <bpmn:incoming>SequenceFlow_1e7u451</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_06y9vd4</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_06y9vd4" sourceRef="Task_01v81zj" targetRef="ExclusiveGateway_0f8a0y0" />
     <bpmn:userTask id="Task_0ewox07" name="Solve Ticket">
       <bpmn:extensionElements>
@@ -261,6 +257,10 @@
       <bpmn:incoming>SequenceFlow_0ogoqek</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0zn7zgz</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:userTask id="Task_01v81zj" name="collect data">
+      <bpmn:incoming>SequenceFlow_1e7u451</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06y9vd4</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:message id="Message_0ia98i6" name="problem_solved" />
   <bpmn:message id="Message_0afhsb6" name="create_ticket" />
@@ -272,7 +272,7 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1e7u451_di" bpmnElement="SequenceFlow_1e7u451">
         <di:waypoint x="192" y="347" />
-        <di:waypoint x="336" y="347" />
+        <di:waypoint x="364" y="347" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0f8a0y0_di" bpmnElement="ExclusiveGateway_0f8a0y0" isMarkerVisible="true">
         <dc:Bounds x="517" y="322" width="50" height="50" />
@@ -303,7 +303,7 @@
         <di:waypoint x="1040" y="214" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BusinessRuleTask_0aolc23_di" bpmnElement="Task_0rly2r8">
-        <dc:Bounds x="318" y="456" width="100" height="80" />
+        <dc:Bounds x="364" y="444" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_07ki4l7_di" bpmnElement="ExclusiveGateway_07ki4l7" isMarkerVisible="true">
         <dc:Bounds x="1239" y="186" width="50" height="50" />
@@ -339,11 +339,8 @@
         <di:waypoint x="1698" y="210" />
         <di:waypoint x="1756" y="210" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_13bza9n_di" bpmnElement="Task_01v81zj">
-        <dc:Bounds x="336" y="307" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_06y9vd4_di" bpmnElement="SequenceFlow_06y9vd4">
-        <di:waypoint x="436" y="347" />
+        <di:waypoint x="464" y="347" />
         <di:waypoint x="517" y="347" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_1wmrmac_di" bpmnElement="Task_0ewox07">
@@ -459,6 +456,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_0axtfbr_di" bpmnElement="ReceiveTask_1t9z8yn">
         <dc:Bounds x="1060" y="502" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_04u83yt_di" bpmnElement="Task_01v81zj">
+        <dc:Bounds x="364" y="307" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
