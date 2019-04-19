@@ -66,7 +66,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
      var voulnerable = $("input[name='voulnerable']:checked").val();
      var lang  = $("#language :selected").val();
 
-    var requestBody = {
+    var requestBodyDMN = {
       variables : {
           language: {
             value:lang,
@@ -94,7 +94,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
       //const dmnID = "Decision_0pa8gvl:23:3f40bd1c-61db-11e9-8454-3e7b74bbc4b0";
       const dmnID = "key/Decision_0pa8gvl";
-      _this.$camundaManager.evaluateDMN(dmnID,requestBody, function(response){
+      _this.$camundaManager.evaluateDMN(dmnID,requestBodyDMN, function(response){
 
          console.log("response from callback:");
          console.log(response);
@@ -125,7 +125,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
                              }
                            };
 
-         _this.$camundaManager.completeNextTask(requestBody);
+         _this.$camundaManager.completeNextTask(requestBodyDMN);
 
        });
   }
