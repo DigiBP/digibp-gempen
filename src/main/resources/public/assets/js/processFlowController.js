@@ -19,6 +19,7 @@ function ProcessFlowController(){
   this.$camundaManager = new getCamundaManagerInstance();
 
   this.registerEventHandlers();
+  
 
 
 

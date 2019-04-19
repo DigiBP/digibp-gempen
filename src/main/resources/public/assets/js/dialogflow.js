@@ -1,6 +1,6 @@
 
-		//var accessToken = "873b57a20abe43f9a13135f3340c62a0"; //IPATESTBOT
-		var accessToken = "5c0daf981b274dbdb8dc7e39eb31f5fd"; //WinMedSupportChatbot
+
+		var accessToken = "b7429c5e20a24f48b0a448b735a1c5d8";
 		var baseUrl = "https://api.api.ai/v1/";
 
 		$(document).ready(function() {
@@ -91,6 +91,8 @@
 			console.log(messageContainer);
 			var objDiv = document.getElementById("responseTable");
 			objDiv.scrollTop = objDiv.scrollHeight;
+
+			var language = $("#language :selected").val();
 			$.ajax({
 				type: "POST",
 				url: baseUrl + "query?v=20150910",
@@ -99,7 +101,7 @@
 				headers: {
 					"Authorization": "Bearer " + accessToken
 				},
-				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+				data: JSON.stringify({ query: text, lang: language, sessionId: "somerandomthing" }),
 
 				success: function(data) {
 					setResponse(JSON.stringify(data, undefined, 2));
