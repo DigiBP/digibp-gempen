@@ -95,7 +95,7 @@
 			send(postback);
 
 			$camundaManager.createTicket(postback);
-			
+
 
 		}
 
@@ -264,4 +264,21 @@
 		function setInputText(){
 			var inputText = $("#input").val();
 			$("#responseTable >tbody").append("<tr><td class='user-request'><div class='alert pull-right'>"+inputText+"</div></td></tr>");
+		}
+
+		function getAllUserRequests(){
+
+				var userRequests = "USER REQUESTS:  ";
+			$( ".user-request" ).each(function( index , element) {
+
+					var elText = 	$(element);
+					var text = elText.find("div").text();
+					console.log(text);
+					userRequests += text + " ### ";
+				//	var elText = 	$(element) " > div").text();
+  				//console.log( elText);
+					//userRequests += elText;
+				});
+
+			return userRequests;
 		}

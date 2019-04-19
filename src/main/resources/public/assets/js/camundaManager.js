@@ -127,30 +127,23 @@ CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
 
 }
 
-CamundaManager.prototype.createTicket = function(postback){
-    var _this = this;
-/*
-    if(postback == "create_ticket"){
+CamundaManager.prototype.sendMessage = function(msgName, variables, callback){
 
-    }else if(postback == "problem_solved")
-    {
+  //send msg to waiting catching msg event
+  var requestURLResource = "message";
+  var  requestBody =     {
+            "messageName" : msgName,
+            "businessKey" : "bkey",
+            "processInstanceId": "7088813d-62a9-11e9-b1ea-063c1e072482",
+            variables
+          };
 
-    }
-    //send msg to waiting catching msg event
-    var requestURL = "message;
+  _this.ajaxHelper.postData(requestURLResource, requestBody, function(response) {
+        console.log("msg sent");
+        if(callback != undefined){
+          callback();
+        }
+  });
 
 
-        requestBody = {
-                          "variables":
-                            {"sample":
-                              {"value": "0", "type": "long"}
-                            }
-                        };
-    }
-
-    _this.ajaxHelper.postData(requestURL, requestBody, function(response) {
-          console.log("task completed");
-    });
-
-*/
 }

@@ -57,36 +57,53 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
   });
 
+  $("#prioFormButton").on("click", function(){
+
+    _this.$camundaManager.createTicket("create_prio_ticket");
+  });
+
+
+}
+  ProcessFlowController.prototype.getUserInstanceVariables = function(){
+
+    var userInstanceVariables ={
+     userName : $("#employeeName").val(),
+     hirarchyLevel : _this.getUserHirarchy(userName),
+      preventWork : $("input[name='preventWork']:checked").val(),
+      onSite : $("input[name='onSite']:checked").val(),
+      voulnerable : $("input[name='voulnerable']:checked").val(),
+      lang  : $("#language :selected").val(),
+      email  : $("#employeeEmail").val(),
+    };
+    return userInstanceVariables;
+  }
 
   ProcessFlowController.prototype.triggerIncidentProcess = function(){
 
-    var userName = $("#employeeName").val();
-    var hirarchyLevel = _this.getUserHirarchy(userName);
-     var preventWork = $("input[name='preventWork']:checked").val();
-     var onSite = $("input[name='onSite']:checked").val();
-     var voulnerable = $("input[name='voulnerable']:checked").val();
-     var lang  = $("#language :selected").val();
+
+    var _this = this;
+   var user =   _this.getUserInstanceVariables();
 
     var requestBodyDMN = {
       variables : {
           language: {
-            value:lang,
+            value:user.lang,
             type: "string"
           },
           hierarchylvl : {
-            value:hirarchyLevel,
+            value: user.hirarchyLevel,
             type: "double"
           },
           work_impact : {
-            value:preventWork,
+            value: user.preventWork,
             type: "boolean"
           },
           presence : {
-            value:onSite,
+            value: user.onSite,
             type: "boolean"
           },
           legal : {
-            value:voulnerable,
+            value: user.voulnerable,
             type: "boolean"
           }
 
@@ -106,7 +123,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          }
 
          alert("incident level: "+ incidentLevel);
-         $(".userNameSpan").text(userName);
+         $(".userNameSpan").text(user.userName);
          $(".severentySpan").text(incidentLevel);
 
          if(incidentLevel == "red"  ){
@@ -120,7 +137,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
            $("#startForm").addClass("hidden");
          }
 
-         startChatbot(lang);
+         startChatbot(user.lang);
          var requestBody = {"variables":
                              {"incidentLevel":
                                {"value": incidentLevel, "type": "string"}
@@ -132,6 +149,46 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          _this.$camundaManager.completeNextTask(requestBody);
 
        });
+  }
+
+  ProcessFlowController.prototype.createTicket = function(type){
+      var _this = this;
+
+      var msgName = type;
+      var prio ="low";
+      var content ="";
+      var currentStatus ="";
+
+      if(type == "create_ticket"){
+          prio = "low"
+          currentStatus = "open";
+          content = getAllUserRequests();
+      }else if(type == "problem_solved")
+      {
+        prio = "low"
+        currentStatus = "closed";
+          content = getAllUserRequests();
+      }else if(type == "create_prio_ticket"){
+        prio = "high"
+        currentStatus = "open";
+        content = $("#highPrioRequest").val();
+      }
+
+      var userInfos = _this.getUserInstanceVariables();
+        var processVariables = {
+                "processVariables" : {
+                        "priorization" : {"value" : "low", "type": "String"},
+                        "user_name" : {"value" : userInfos.userName, "type": "String"},
+                        "user_hierarchy_lvl" : {"value" :  userInfos.hirarchyLevel, "type": "String"},
+                        "email" : {"value" : userInfos.email, "type": "String"},
+                        "content" : {"value" : content, "type": "String"},
+                        "current_status" : {"value" : currentStatus, "type": "String"}
+                      }
+                    };
+
+          _this.$camundaManager.sendMessage(msgName,processVariables, function(){alert("Ticket created! Messagename: "+msgName)});
+
+
   }
 
   /*
@@ -163,7 +220,3 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
     });
   */
-
-
-
-}
