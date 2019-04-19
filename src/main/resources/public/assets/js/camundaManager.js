@@ -134,7 +134,7 @@ CamundaManager.prototype.sendMessage = function(msgName, variables, callback){
   var  requestBody =     {
             "messageName" : msgName,
             "businessKey" : "bkey",
-            "processInstanceId": "7088813d-62a9-11e9-b1ea-063c1e072482",
+            "processInstanceId": _this.processInstanceID,
             variables
           };
 
