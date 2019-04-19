@@ -83,7 +83,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
 
     var _this = this;
-   var user =   _this.getUserInstanceVariables();
+   var user =   $processFlowController.getUserInstanceVariables();
 
     var requestBodyDMN = {
       variables : {
