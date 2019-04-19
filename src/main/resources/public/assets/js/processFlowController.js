@@ -122,10 +122,32 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          var requestBody = {"variables":
                              {"incidentLevel":
                                {"value": incidentLevel, "type": "string"}
+                             },
+                             "language": {
+                               "value":lang,
+                                "type": "string"
+                             },
+                             "hierarchylvl" : {
+                               "value":hirarchyLevel,
+                                "type": "double"
+                             },
+                             "work_impact" : {
+                               "value":preventWork,
+                                "type": "boolean"
+                             },
+                             "presence" : {
+                               "value":onSite,
+                                "type": "boolean"
+                             },
+                             "legal" : {
+                               "value":voulnerable,
+                                "type": "boolean"
                              }
+
+
                            };
 
-         _this.$camundaManager.completeNextTask(requestBodyDMN);
+         _this.$camundaManager.completeNextTask(requestBody);
 
        });
   }
