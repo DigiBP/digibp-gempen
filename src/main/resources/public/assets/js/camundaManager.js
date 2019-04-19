@@ -85,11 +85,7 @@ CamundaManager.prototype.completeNextTask = function(requestBody){
 
             //complete open task
             success = _this.completeTaskByID(taskIDtoComplete,requestBody);
-            if(success){
-              alert("hurray");
-            }else{
-              alert("failed to complete...");
-            }
+
         });
 
 
@@ -114,11 +110,10 @@ CamundaManager.prototype.completeTaskByID = function(taskID, requestBody){
       }
 
       _this.ajaxHelper.postData(requestURL, requestBody, function(response) {
-          console.log(response);
-          return true;
+            console.log("task completed");
       });
 
-      return false;
+
 }
 
 CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
