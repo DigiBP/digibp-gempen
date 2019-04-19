@@ -94,7 +94,7 @@
 			console.log(postback);
 			send(postback);
 
-			$camundaManager.createTicket(postback);
+			$processFlowController.createTicket(postback);
 
 
 		}

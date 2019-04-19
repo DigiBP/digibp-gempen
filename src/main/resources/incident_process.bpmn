@@ -152,11 +152,13 @@
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
 
-"priorization": "low",
-	"user_name": "Tester demoi",
-	"user_hierarchy_lvl": "low",
-	"email": "david@morandi.me",
-	"content": "camunda sucks"
+      "priorization": v_priorization,
+	"user_name": v_user_name,
+	"user_hierarchy_lvl": v_user_hierarchy_lvl,
+	"email": v_email,
+	"content":  v_content,
+       "current_status" : "v_current_status"
+
 });
 </camunda:script>
             </camunda:inputParameter>

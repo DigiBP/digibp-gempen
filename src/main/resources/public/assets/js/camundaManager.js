@@ -127,7 +127,7 @@ CamundaManager.prototype.evaluateDMN = function(dmnID, requestBody, callback){
 
 }
 
-CamundaManager.prototype.sendMessage = function(msgName, variables, callback){
+CamundaManager.prototype.sendMessage = function(msgName, processVariables, callback){
   var _this  = this;
   //send msg to waiting catching msg event
   var requestURLResource = "message";
@@ -135,7 +135,7 @@ CamundaManager.prototype.sendMessage = function(msgName, variables, callback){
             "messageName" : msgName,
             "businessKey" : "bkey",
             "processInstanceId": _this.processInstanceID,
-            variables
+            processVariables
           };
 
   _this.ajaxHelper.postData(requestURLResource, requestBody, function(response) {

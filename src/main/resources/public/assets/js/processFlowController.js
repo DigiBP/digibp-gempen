@@ -177,14 +177,15 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
       var userInfos = _this.getUserInstanceVariables();
         var processVariables = {
-                "processVariables" : {
-                        "priorization" : {"value" : "low", "type": "String"},
-                        "user_name" : {"value" : userInfos.userName, "type": "String"},
-                        "user_hierarchy_lvl" : {"value" :  userInfos.hirarchyLevel, "type": "String"},
-                        "email" : {"value" : userInfos.email, "type": "String"},
-                        "content" : {"value" : content, "type": "String"},
-                        "current_status" : {"value" : currentStatus, "type": "String"}
-                      }
+
+
+                        "v_priorization" : {"value" : prio, "type": "String"},
+                        "v_user_name" : {"value" : userInfos.userName, "type": "String"},
+                        "v_user_hierarchy_lvl" : {"value" :  userInfos.hirarchyLevel, "type": "String"},
+                        "v_email" : {"value" : userInfos.email, "type": "String"},
+                        "v_content" : {"value" : content, "type": "String"},
+                        "v_current_status" : {"value" : currentStatus, "type": "String"}
+                      
                     };
 
           _this.$camundaManager.sendMessage(msgName,processVariables, function(){alert("Ticket created! Messagename: "+msgName)});
