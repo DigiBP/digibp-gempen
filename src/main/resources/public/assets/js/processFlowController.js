@@ -19,7 +19,7 @@ function ProcessFlowController(){
   this.$camundaManager = new getCamundaManagerInstance();
 
   this.registerEventHandlers();
-  
+
 
 
 
@@ -120,6 +120,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
            $("#startForm").addClass("hidden");
          }
 
+         startChatbot(lang);
          var requestBody = {"variables":
                              {"incidentLevel":
                                {"value": incidentLevel, "type": "string"}

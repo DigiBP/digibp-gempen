@@ -3,6 +3,19 @@
 		var accessToken = "b7429c5e20a24f48b0a448b735a1c5d8";
 		var baseUrl = "https://api.api.ai/v1/";
 
+		var chatbotLanguage = "EN";
+
+		function startChatbot(language){
+
+				chatbotLanguage = language;
+
+				if(language == "DE")
+				{
+					$("#chatbotHeaderMsg").text("Bitte wenden Sie sich mit ihrerm Problem an den Chatbot");
+				}
+				send("start");
+		}
+
 		$(document).ready(function() {
 			$("#input").keypress(function(event) {
 				if (event.which == 13) {
@@ -25,7 +38,7 @@
 				}
 			});
 
-			send("start");
+
 		});
 
 		var recognition;
@@ -92,7 +105,7 @@
 			var objDiv = document.getElementById("responseTable");
 			objDiv.scrollTop = objDiv.scrollHeight;
 
-			var language = $("#language :selected").val();
+
 			$.ajax({
 				type: "POST",
 				url: baseUrl + "query?v=20150910",
@@ -101,7 +114,7 @@
 				headers: {
 					"Authorization": "Bearer " + accessToken
 				},
-				data: JSON.stringify({ query: text, lang: language, sessionId: "somerandomthing" }),
+				data: JSON.stringify({ query: text, lang: chatbotLanguage, sessionId: "somerandomthing" }),
 
 				success: function(data) {
 					setResponse(JSON.stringify(data, undefined, 2));
