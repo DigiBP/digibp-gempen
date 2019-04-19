@@ -10,7 +10,9 @@
       <bpmn:outgoing>SequenceFlow_1lm5ypb</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0pwfatn</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1lm5ypb" name="High" sourceRef="ExclusiveGateway_0f8a0y0" targetRef="IntermediateThrowEvent_0cg8rds" />
+    <bpmn:sequenceFlow id="SequenceFlow_1lm5ypb" name="High" sourceRef="ExclusiveGateway_0f8a0y0" targetRef="Task_1322vu5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${incidentLevel=="high"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0pwfatn" name="low" sourceRef="ExclusiveGateway_0f8a0y0" targetRef="Task_1gv0fhe">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${incidentLevel=="low"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -85,10 +87,6 @@
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1fjw23y" name="solved" sourceRef="ExclusiveGateway_1db16ya" targetRef="IntermediateCatchEvent_14kbtvn" />
     <bpmn:sequenceFlow id="SequenceFlow_0ogoqek" sourceRef="IntermediateCatchEvent_14kbtvn" targetRef="ReceiveTask_1t9z8yn" />
-    <bpmn:task id="ReceiveTask_1t9z8yn" name="Create Solved Ticket">
-      <bpmn:incoming>SequenceFlow_0ogoqek</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0zn7zgz</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_06v3nr3" sourceRef="Task_1035jx3" targetRef="Task_18r5ydp" />
     <bpmn:serviceTask id="Task_18r5ydp" name="Get existing KB">
       <bpmn:extensionElements>
@@ -132,10 +130,6 @@
       <bpmn:incoming>SequenceFlow_0ai2ffl</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_04swaj1</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:task id="ReceiveTask_1csvkik" name="Create Open Ticket">
-      <bpmn:incoming>SequenceFlow_1us322c</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_06396sf</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_0eky1mz" name="request for help&#10;&#10;">
       <bpmn:incoming>SequenceFlow_1x67kte</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1us322c</bpmn:outgoing>
@@ -157,7 +151,7 @@
 	"user_hierarchy_lvl": v_user_hierarchy_lvl,
 	"email": v_email,
 	"content":  v_content,
-       "current_status" : "v_current_status"
+       "current_status" : v_current_status
 
 });
 </camunda:script>
@@ -171,7 +165,7 @@
           <camunda:connectorId>http-connector</camunda:connectorId>
         </camunda:connector>
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_1hrzf7c</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_188t9xp</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_06v3nr3</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_04swaj1" sourceRef="Task_015nn46" targetRef="ExclusiveGateway_0q41gzf" />
@@ -200,12 +194,73 @@
       <bpmn:incoming>SequenceFlow_1esljjg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0rftbxf</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1hrzf7c" sourceRef="IntermediateThrowEvent_0cg8rds" targetRef="Task_1035jx3" />
-    <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_0cg8rds">
+    <bpmn:receiveTask id="Task_1322vu5" name="wait for request" messageRef="Message_1etvtcl">
       <bpmn:incoming>SequenceFlow_1lm5ypb</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1hrzf7c</bpmn:outgoing>
-      <bpmn:messageEventDefinition messageRef="Message_1etvtcl" />
-    </bpmn:intermediateCatchEvent>
+      <bpmn:outgoing>SequenceFlow_188t9xp</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:sequenceFlow id="SequenceFlow_188t9xp" sourceRef="Task_1322vu5" targetRef="Task_1035jx3" />
+    <bpmn:serviceTask id="ReceiveTask_1csvkik" name="Create Open Ticket">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
+
+      "priorization": v_priorization,
+	"user_name": v_user_name,
+	"user_hierarchy_lvl": v_user_hierarchy_lvl,
+	"email": v_email,
+	"content":  v_content,
+       "current_status" : v_current_status
+
+});
+</camunda:script>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/qu5k8u4emm6oyzc6wmdm13jcuyq76xsw</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1us322c</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06396sf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ReceiveTask_1t9z8yn" name="Create Solved Ticket">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://hook.integromat.com/qu5k8u4emm6oyzc6wmdm13jcuyq76xsw</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
+
+      "priorization": v_priorization,
+	"user_name": v_user_name,
+	"user_hierarchy_lvl": v_user_hierarchy_lvl,
+	"email": v_email,
+	"content":  v_content,
+       "current_status" : v_current_status
+
+});
+</camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0ogoqek</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zn7zgz</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:message id="Message_0ia98i6" name="problem_solved" />
   <bpmn:message id="Message_0afhsb6" name="create_ticket" />
@@ -227,10 +282,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1lm5ypb_di" bpmnElement="SequenceFlow_1lm5ypb">
         <di:waypoint x="542" y="322" />
-        <di:waypoint x="542" y="214" />
-        <di:waypoint x="563" y="212" />
+        <di:waypoint x="542" y="251" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="546" y="265" width="23" height="14" />
+          <dc:Bounds x="546" y="276" width="23" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0pwfatn_di" bpmnElement="SequenceFlow_0pwfatn">
@@ -245,10 +299,8 @@
         <dc:Bounds x="1756" y="192" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1esljjg_di" bpmnElement="SequenceFlow_1esljjg">
-        <di:waypoint x="954" y="174" />
-        <di:waypoint x="954" y="61" />
-        <di:waypoint x="1090" y="61" />
-        <di:waypoint x="1090" y="171" />
+        <di:waypoint x="1004" y="214" />
+        <di:waypoint x="1040" y="214" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BusinessRuleTask_0aolc23_di" bpmnElement="Task_0rly2r8">
         <dc:Bounds x="318" y="456" width="100" height="80" />
@@ -346,9 +398,6 @@
         <di:waypoint x="990" y="542" />
         <di:waypoint x="1060" y="542" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_1mmezah_di" bpmnElement="ReceiveTask_1t9z8yn">
-        <dc:Bounds x="1060" y="502" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_06v3nr3_di" bpmnElement="SequenceFlow_06v3nr3">
         <di:waypoint x="757" y="211" />
         <di:waypoint x="768" y="211" />
@@ -365,9 +414,6 @@
       <bpmndi:BPMNShape id="ServiceTask_1v8n76e_di" bpmnElement="Task_015nn46">
         <dc:Bounds x="1464" y="81" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1lfypwa_di" bpmnElement="ReceiveTask_1csvkik">
-        <dc:Bounds x="1138" y="307" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_0eky1mz_di" bpmnElement="IntermediateCatchEvent_0eky1mz">
         <dc:Bounds x="946" y="384" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -375,7 +421,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1us322c_di" bpmnElement="SequenceFlow_1us322c">
-        <di:waypoint x="982" y="403" />
+        <di:waypoint x="982" y="402" />
         <di:waypoint x="1175" y="407" />
         <di:waypoint x="1179" y="387" />
       </bpmndi:BPMNEdge>
@@ -401,12 +447,18 @@
       <bpmndi:BPMNShape id="ServiceTask_06dv4z0_di" bpmnElement="Task_1rojfft">
         <dc:Bounds x="1040" y="171" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1hrzf7c_di" bpmnElement="SequenceFlow_1hrzf7c">
-        <di:waypoint x="599" y="211" />
+      <bpmndi:BPMNShape id="ReceiveTask_1mvvzyo_di" bpmnElement="Task_1322vu5">
+        <dc:Bounds x="530" y="171" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_188t9xp_di" bpmnElement="SequenceFlow_188t9xp">
+        <di:waypoint x="630" y="211" />
         <di:waypoint x="657" y="211" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_0n9xxcl_di" bpmnElement="IntermediateThrowEvent_0cg8rds">
-        <dc:Bounds x="563" y="193" width="36" height="36" />
+      <bpmndi:BPMNShape id="ServiceTask_0fym2ts_di" bpmnElement="ReceiveTask_1csvkik">
+        <dc:Bounds x="1138" y="307" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0axtfbr_di" bpmnElement="ReceiveTask_1t9z8yn">
+        <dc:Bounds x="1060" y="502" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
