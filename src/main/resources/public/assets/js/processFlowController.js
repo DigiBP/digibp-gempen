@@ -21,12 +21,30 @@ function ProcessFlowController(){
   this.businessKey = guid();
   this.registerEventHandlers();
 
+//  this.USERS =
 
 
 
 }
+/*
+ProcessFlowController.prototype.loadUsers = function(){
+  https://hook.integromat.com/ojx7opxw88pitz5uaw7py40hnlyvcy51
+  $.ajax({
+      url: "https://hook.integromat.com/ojx7opxw88pitz5uaw7py40hnlyvcy51",
+      method: "GET",
+      contentType: "application/json; charset=utf-8",
+      success: function(){
 
+      },
+      error:function(response){ console.log("error in GET request"); console.log(response);}
+    });
+
+}
+*/
 ProcessFlowController.prototype.getUserHirarchy = function(name){
+
+
+
   const USERS = {
         "Oliver Faust" : 5,
         "David Morandi" : 6,
@@ -185,7 +203,8 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
                         "v_user_hierarchy_lvl" : {"value" :  userInfos.hirarchyLevel, "type": "String"},
                         "v_email" : {"value" : userInfos.email, "type": "String"},
                         "v_content" : {"value" : content, "type": "String"},
-                        "v_current_status" : {"value" : currentStatus, "type": "String"}
+                        "v_current_status" : {"value" : currentStatus, "type": "String"},
+
 
                     };
 

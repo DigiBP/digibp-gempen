@@ -43,7 +43,7 @@
     <bpmn:userTask id="Task_0ewox07" name="Solve Ticket">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="ticket_problem" label="Problem" type="string" />
+          <camunda:formField id="v_content" label="Problem" type="string" />
           <camunda:formField id="ticket_solution" type="string" />
           <camunda:formField id="new_kb" label="New KB entry?" type="boolean" defaultValue="false" />
           <camunda:formField id="kbEntry" label="Existing KB Entry" type="string" />
@@ -179,7 +179,7 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
-
+   "b_key" : v_incident_number
 });
 </camunda:script>
             </camunda:inputParameter>
