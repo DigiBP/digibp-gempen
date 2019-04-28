@@ -1,4 +1,7 @@
-
+/**
+* @author: Oliver Faust
+* Based on https://gist.github.com/Gugic/cfc008599fa9a82eeba4127648009132 . Modified by Oliver Faust TMR AG
+*/
 
 		var accessToken = "b7429c5e20a24f48b0a448b735a1c5d8";
 		var baseUrl = "https://api.api.ai/v1/";

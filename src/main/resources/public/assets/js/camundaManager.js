@@ -1,4 +1,7 @@
-
+/**
+* @author: Oliver Faust
+* This class handles the camunda api calling. Various api calls are implemented like starting the process, completing tasks and evaluate decison models.
+*/
 
 /*Singleton*/
 var $camundaManager = null;

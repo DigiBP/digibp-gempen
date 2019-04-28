@@ -1,3 +1,8 @@
+/**
+* @author: Oliver Faust
+* Test stuff. Not used anymore!
+*/
+
 $(document).ready(function() {
 
 var baseUrl = "https://gempen.herokuapp.com";

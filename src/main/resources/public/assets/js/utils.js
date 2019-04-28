@@ -1,4 +1,7 @@
-
+/**
+* @author: Oliver Faust
+* Utility functions like making Ajax calls.
+*/
 
 function AjaxHelper(baseUrl){
   this.AJAXURL = baseUrl;

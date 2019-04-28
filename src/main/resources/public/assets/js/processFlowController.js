@@ -1,3 +1,8 @@
+/**
+* @author: Oliver Faust
+* This Class provides functionallity to steer the process flow.
+*/
+
 /*on document ready*/
 $( function() {
 	var $processFlowController = getPFCInstance();
@@ -204,6 +209,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
                         "v_email" : {"value" : userInfos.email, "type": "String"},
                         "v_content" : {"value" : content, "type": "String"},
                         "v_current_status" : {"value" : currentStatus, "type": "String"},
+												"v_language" : {"value" : userInfos.lang, "type": "String"},
 
 
                     };
@@ -213,32 +219,4 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
   }
 
-  /*
-    $("#testComplete").on("click", function(){
-
-      console.log("testComplete clicked!");
-      var requestBody = {"variables":
-                          {"incidentLevel":
-                            {"value": "high", "type": "string"}
-                          }
-                        };
-
-      _this.$camundaManager.completeNextTask(requestBody);
-    });
-
-
-    $("#sendRequest").on("click", function(){
-
-      var dmnID = "Decision_08ginzr_test:5:79264de1-56ba-11e9-ad77-8aa1d7eb306b";
-      var requestBody = {"variables":
-                           {"priority" :
-                            { "value" : 2, "type" : "long" }
-                          }
-                        };
-
-      _this.$camundaManager.evaluateDMN(dmnID,requestBody, function(){
-         alert("callback fired!");
-      });
-
-    });
-  */
+  
