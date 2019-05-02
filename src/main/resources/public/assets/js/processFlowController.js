@@ -196,13 +196,14 @@ console.log(incidentLevel);
 
          startChatbot(user.lang);
          var requestBody = {"variables":
+				 				[
                              {"incidentLevel":
                                {"value": incidentLevel, "type": "string"}
                              },
 														 {"employeePrio":
                                {"value": employeePrio, "type": "string"}
                              }
-
+]
 
 
                            };
