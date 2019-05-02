@@ -19,16 +19,17 @@
     <bpmn:messageFlow id="MessageFlow_1vajw3s" sourceRef="Task_1rojfft" targetRef="Participant_04v23p6" />
     <bpmn:messageFlow id="MessageFlow_06vxakq" sourceRef="Task_015nn46" targetRef="Participant_04v23p6" />
     <bpmn:messageFlow id="MessageFlow_0rnvbov" sourceRef="Task_1yasm8a" targetRef="Participant_1b3nlb8" />
+    <bpmn:messageFlow id="MessageFlow_0a567he" sourceRef="Task_0oziner" targetRef="Participant_04v23p6" />
   </bpmn:collaboration>
   <bpmn:process id="incident_process_2" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0yewu1l">
       <bpmn:lane id="Lane_0oqufwf" name="Helpdesk agent">
-        <bpmn:flowNodeRef>Task_0ewox07</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_07ki4l7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_15f2bp7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_015nn46</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0q41gzf</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_05hnitf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0ewox07</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1baqyyp" name="Automated Agent">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
@@ -41,8 +42,6 @@
         <bpmn:flowNodeRef>IntermediateCatchEvent_0eky1mz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ReceiveTask_1csvkik</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1035jx3</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_18r5ydp</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_09ek5sh</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ReceiveTask_1t9z8yn</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_01v81zj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1yasm8a</bpmn:flowNodeRef>
@@ -50,6 +49,11 @@
         <bpmn:flowNodeRef>ExclusiveGateway_1t8r8v2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_093cut8</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1rojfft</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_09ek5sh</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_18r5ydp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_1vfrtxh</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_0w4h1q6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0oziner</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="SequenceFlow_188t9xp" sourceRef="Task_1322vu5" targetRef="Task_1035jx3" />
@@ -169,51 +173,8 @@
       <bpmn:incoming>SequenceFlow_188t9xp</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ntw6ef</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_18r5ydp" name="Get existing KB">
-      <bpmn:extensionElements>
-        <camunda:connector>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">https://hook.integromat.com/ktfxeyy3g44mx62e5bh63wneehwa4kpo</camunda:inputParameter>
-            <camunda:outputParameter name="kbEntry">
-              <camunda:script scriptFormat="JavaScript">objectR=JSON.parse(response);
-
-
-    var object = objectR.kb;
-              kbEntry ="";
-              for(var i = 1; i &lt; object.length; i++){
-                   
-                    kbEntry = kbEntry +object[i].content +" \n------ \n";
-              }
-</camunda:script>
-            </camunda:outputParameter>
-          </camunda:inputOutput>
-          <camunda:connectorId>http-connector</camunda:connectorId>
-        </camunda:connector>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_1vvy050</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1dcvi5e</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:task id="Task_09ek5sh" name="Send Mail">
-      <bpmn:incoming>SequenceFlow_0ntw6ef</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_06396sf</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1vvy050</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1dcvi5e" sourceRef="Task_18r5ydp" targetRef="Task_0ewox07" />
     <bpmn:sequenceFlow id="SequenceFlow_0xg4olr" sourceRef="Task_0ewox07" targetRef="ExclusiveGateway_07ki4l7" />
-    <bpmn:userTask id="Task_0ewox07" name="Solve Ticket">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="v_content" label="Problem" type="string" />
-          <camunda:formField id="ticket_solution" label="Solution" type="string" />
-          <camunda:formField id="new_kb" label="New KB entry?" type="boolean" defaultValue="false" />
-          <camunda:formField id="kbEntry" label="Existing KB Entry" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_1dcvi5e</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0xg4olr</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1vvy050" sourceRef="Task_09ek5sh" targetRef="Task_18r5ydp" />
     <bpmn:serviceTask id="ReceiveTask_1t9z8yn" name="Create Solved Ticket">
       <bpmn:extensionElements>
         <camunda:connector>
@@ -369,6 +330,97 @@
       <bpmn:incoming>SequenceFlow_1tam11n</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lh4scp</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:task id="Task_09ek5sh" name="Send Mail">
+      <bpmn:incoming>SequenceFlow_0ntw6ef</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_06396sf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1y0f7ru</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:userTask id="Task_0ewox07" name="Solve Ticket">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="v_content" label="Problem" type="string" />
+          <camunda:formField id="ticket_solution" label="Solution" type="string" />
+          <camunda:formField id="new_kb" label="New KB entry?" type="boolean" defaultValue="false" />
+          <camunda:formField id="kbEntry" label="Existing KB Entry" type="string" />
+          <camunda:formField id="employeePrio" label="Employee Priorisation" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1dcvi5e</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0xg4olr</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_18r5ydp" name="Get existing KB">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hook.integromat.com/ktfxeyy3g44mx62e5bh63wneehwa4kpo</camunda:inputParameter>
+            <camunda:outputParameter name="kbEntry">
+              <camunda:script scriptFormat="JavaScript">objectR=JSON.parse(response);
+
+
+    var object = objectR.kb;
+              kbEntry ="";
+              for(var i = 1; i &lt; object.length; i++){
+                   
+                    kbEntry = kbEntry +object[i].content +" \n------ \n";
+              }
+</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1iluivt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1dcvi5e</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1vfrtxh">
+      <bpmn:incoming>SequenceFlow_1y0f7ru</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0t6f9ug</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1himh8s</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1y0f7ru" sourceRef="Task_09ek5sh" targetRef="ExclusiveGateway_1vfrtxh" />
+    <bpmn:sequenceFlow id="SequenceFlow_0t6f9ug" sourceRef="ExclusiveGateway_1vfrtxh" targetRef="ExclusiveGateway_0w4h1q6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${v_language=="EN"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1himh8s" sourceRef="ExclusiveGateway_1vfrtxh" targetRef="Task_0oziner">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${v_language=="DE"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1ml3m75" sourceRef="Task_0oziner" targetRef="ExclusiveGateway_0w4h1q6" />
+    <bpmn:sequenceFlow id="SequenceFlow_1iluivt" sourceRef="ExclusiveGateway_0w4h1q6" targetRef="Task_18r5ydp" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0w4h1q6">
+      <bpmn:incoming>SequenceFlow_0t6f9ug</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1ml3m75</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1iluivt</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_0oziner" name="Translate">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://hook.integromat.com/2ebreon5yn341mvlovbi2111rqoufixh
+
+</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
+"problem":v_content
+});</camunda:script>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="v_content">
+              <camunda:script scriptFormat="JavaScript">v_content=response;
+</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1himh8s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ml3m75</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:association id="Association_05oe8xs" sourceRef="Task_0rly2r8" targetRef="TextAnnotation_1ijn7ae" />
     <bpmn:textAnnotation id="TextAnnotation_1ijn7ae">
       <bpmn:text>Logic to decide which track is proided for the user based on given  user data</bpmn:text>
@@ -415,7 +467,7 @@
         <dc:Bounds x="2259" y="570" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_1wmrmac_di" bpmnElement="Task_0ewox07">
-        <dc:Bounds x="1658" y="555" width="100" height="80" />
+        <dc:Bounds x="1779" y="555" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_1k24vk5_di" bpmnElement="Task_15f2bp7">
         <dc:Bounds x="2015" y="452" width="100" height="80" />
@@ -442,7 +494,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1hgkwd4_di" bpmnElement="Task_18r5ydp">
-        <dc:Bounds x="1484" y="679" width="100" height="80" />
+        <dc:Bounds x="1620" y="679" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1v8n76e_di" bpmnElement="Task_015nn46">
         <dc:Bounds x="2148" y="452" width="100" height="80" />
@@ -478,9 +530,9 @@
         <di:waypoint x="2284" y="570" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_06396sf_di" bpmnElement="SequenceFlow_06396sf">
-        <di:waypoint x="1161" y="806" />
-        <di:waypoint x="1372" y="806" />
-        <di:waypoint x="1372" y="759" />
+        <di:waypoint x="1261" y="806" />
+        <di:waypoint x="1317" y="806" />
+        <di:waypoint x="1317" y="759" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0ogoqek_di" bpmnElement="SequenceFlow_0ogoqek">
         <di:waypoint x="1115" y="915" />
@@ -563,11 +615,11 @@
         <di:waypoint x="261" y="806" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Task_09ek5sh_di" bpmnElement="Task_09ek5sh">
-        <dc:Bounds x="1322" y="679" width="100" height="80" />
+        <dc:Bounds x="1267" y="679" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0ntw6ef_di" bpmnElement="SequenceFlow_0ntw6ef">
         <di:waypoint x="907" y="719" />
-        <di:waypoint x="1322" y="719" />
+        <di:waypoint x="1267" y="719" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_0oqufwf_di" bpmnElement="Lane_0oqufwf" isHorizontal="true">
         <dc:Bounds x="186" y="314" width="2632" height="349" />
@@ -580,22 +632,17 @@
         <di:waypoint x="1161" y="806" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1dcvi5e_di" bpmnElement="SequenceFlow_1dcvi5e">
-        <di:waypoint x="1588" y="719" />
-        <di:waypoint x="1598" y="719" />
-        <di:waypoint x="1598" y="595" />
-        <di:waypoint x="1658" y="595" />
+        <di:waypoint x="1670" y="679" />
+        <di:waypoint x="1670" y="595" />
+        <di:waypoint x="1779" y="595" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0xg4olr_di" bpmnElement="SequenceFlow_0xg4olr">
-        <di:waypoint x="1758" y="595" />
-        <di:waypoint x="1936" y="595" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1vvy050_di" bpmnElement="SequenceFlow_1vvy050">
-        <di:waypoint x="1422" y="719" />
-        <di:waypoint x="1484" y="719" />
+        <di:waypoint x="1879" y="595" />
+        <di:waypoint x="1937" y="595" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_029inpv_di" bpmnElement="MessageFlow_029inpv">
-        <di:waypoint x="1372" y="679" />
-        <di:waypoint x="1372" y="142" />
+        <di:waypoint x="1317" y="679" />
+        <di:waypoint x="1317" y="142" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_1krgjv5_di" bpmnElement="Participant_04v23p6" isHorizontal="true">
         <dc:Bounds x="278" y="167" width="1022" height="60" />
@@ -618,8 +665,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_1v3eik8_di" bpmnElement="MessageFlow_1v3eik8">
         <di:waypoint x="1300" y="210" />
-        <di:waypoint x="1527" y="210" />
-        <di:waypoint x="1527" y="679" />
+        <di:waypoint x="1663" y="210" />
+        <di:waypoint x="1663" y="679" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_1vajw3s_di" bpmnElement="MessageFlow_1vajw3s">
         <di:waypoint x="2545" y="679" />
@@ -707,6 +754,43 @@
         <di:waypoint x="2556" y="759" />
         <di:waypoint x="2556" y="799" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1vfrtxh_di" bpmnElement="ExclusiveGateway_1vfrtxh" isMarkerVisible="true">
+        <dc:Bounds x="1402" y="694" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1y0f7ru_di" bpmnElement="SequenceFlow_1y0f7ru">
+        <di:waypoint x="1367" y="719" />
+        <di:waypoint x="1402" y="719" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0w4h1q6_di" bpmnElement="ExclusiveGateway_0w4h1q6" isMarkerVisible="true">
+        <dc:Bounds x="1546" y="694" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0t6f9ug_di" bpmnElement="SequenceFlow_0t6f9ug">
+        <di:waypoint x="1452" y="719" />
+        <di:waypoint x="1546" y="719" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1himh8s_di" bpmnElement="SequenceFlow_1himh8s">
+        <di:waypoint x="1427" y="744" />
+        <di:waypoint x="1427" y="824" />
+        <di:waypoint x="1448" y="824" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ml3m75_di" bpmnElement="SequenceFlow_1ml3m75">
+        <di:waypoint x="1548" y="824" />
+        <di:waypoint x="1571" y="824" />
+        <di:waypoint x="1571" y="744" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1iluivt_di" bpmnElement="SequenceFlow_1iluivt">
+        <di:waypoint x="1596" y="719" />
+        <di:waypoint x="1620" y="719" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_0a567he_di" bpmnElement="MessageFlow_0a567he">
+        <di:waypoint x="1498" y="784" />
+        <di:waypoint x="1498" y="506" />
+        <di:waypoint x="1255" y="506" />
+        <di:waypoint x="1255" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1k4xlcg_di" bpmnElement="Task_0oziner">
+        <dc:Bounds x="1448" y="784" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

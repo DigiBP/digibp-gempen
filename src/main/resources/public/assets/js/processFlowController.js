@@ -176,8 +176,10 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          if(response.length > 0){
            incidentLevel = response[0].incidentlevel.value;
          }
+				 var employeePrio = incidentLevel;
 
-         alert("incident level: "+ incidentLevel);
+//         alert("incident level: "+ incidentLevel);
+console.log(incidentLevel);
          $(".userNameSpan").text(user.userName);
          $(".severentySpan").text(incidentLevel);
 
@@ -196,7 +198,11 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
          var requestBody = {"variables":
                              {"incidentLevel":
                                {"value": incidentLevel, "type": "string"}
+                             },
+														 {"employeePrio":
+                               {"value": employeePrio, "type": "string"}
                              }
+
 
 
                            };
