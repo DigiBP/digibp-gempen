@@ -26,39 +26,69 @@ function ProcessFlowController(){
   this.businessKey = guid();
   this.registerEventHandlers();
 
-//  this.USERS =
+ 	this.USERS = {};
 
+	this.loadUsers();
 
+	$("#employeeName").focusout(function(){
+		try{
+			var user = $("#employeeName").val();
+			var 	userObj  = $processFlowController.getUserObjectByName(user);
+		 $("#employeeEmail").val(userObj.email);
+		  $("#language").val(userObj.language);
+		}catch(err){
+		console.log("unknown user");
+		}
+
+	});
 
 }
-/*
+
 ProcessFlowController.prototype.loadUsers = function(){
-  https://hook.integromat.com/ojx7opxw88pitz5uaw7py40hnlyvcy51
+	var _this = this;
   $.ajax({
       url: "https://hook.integromat.com/ojx7opxw88pitz5uaw7py40hnlyvcy51",
       method: "GET",
       contentType: "application/json; charset=utf-8",
-      success: function(){
+      success: function(response){
 
+				_this.USERS = response.level;
+				console.log(_this.USERS);
       },
       error:function(response){ console.log("error in GET request"); console.log(response);}
     });
 
 }
-*/
+
+
+ProcessFlowController.prototype.getUserObjectByName = function(value){
+var _this = this;
+
+
+for (var i = 0; i < _this.USERS.length; i++) {
+		if (_this.USERS[i]['name'] === value) {
+				return _this.USERS[i];
+		}
+}
+return null;
+
+}
+
+
 ProcessFlowController.prototype.getUserHirarchy = function(name){
 
-
-
+var _this = this;
+/*
   const USERS = {
         "Oliver Faust" : 5,
         "David Morandi" : 6,
         "Max Muster" : 2,
         "tester" : 1,
       };
+			*/
     var level = 1;
     try{
-      level  = USERS[name];
+      level  = _this.USERS[name];
     }catch(err){
     console.log("unknown user");
     }
@@ -93,7 +123,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
     var userName = $("#employeeName").val();
     var userInstanceVariables ={
      userName :userName,
-     hirarchyLevel : _this.getUserHirarchy(userName),
+     hirarchyLevel : _this.getUserObjectByName(userName).level,
       preventWork : $("input[name='preventWork']:checked").val(),
       onSite : $("input[name='onSite']:checked").val(),
       voulnerable : $("input[name='voulnerable']:checked").val(),
@@ -183,11 +213,14 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
       var prio ="low";
       var content ="";
       var currentStatus ="";
+			var callback = function(){console.log("ticket created");};
+
 
       if(type == "create_ticket"){
           prio = "low"
           currentStatus = "open";
           content = getAllUserRequests();
+
       }else if(type == "problem_solved")
       {
         prio = "low"
@@ -197,6 +230,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
         prio = "high"
         currentStatus = "open";
         content = $("#highPrioRequest").val();
+				callback = function(){ $("#highPrioForm").addClass("hidden");  $("#ticketCreatedArea").removeClass("hidden"); }
       }
 
       var userInfos = _this.getUserInstanceVariables();
@@ -214,9 +248,7 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
 
                     };
 
-          _this.$camundaManager.sendMessage(msgName,processVariables, function(){alert("Ticket created! Messagename: "+msgName)});
+          _this.$camundaManager.sendMessage(msgName,processVariables, callback);
 
 
   }
-
-  
