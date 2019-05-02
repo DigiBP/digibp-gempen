@@ -254,6 +254,7 @@ console.log(incidentLevel);
                         "v_user_hierarchy_lvl" : {"value" :  userInfos.hirarchyLevel, "type": "String"},
                         "v_email" : {"value" : userInfos.email, "type": "String"},
                         "v_content" : {"value" : content, "type": "String"},
+												"v_content_orig" : {"value" : content, "type": "String"},
                         "v_current_status" : {"value" : currentStatus, "type": "String"},
 												"v_language" : {"value" : userInfos.lang, "type": "String"},
 

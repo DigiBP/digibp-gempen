@@ -271,7 +271,7 @@
             <camunda:inputParameter name="url">https://hook.integromat.com/9purw84x250h3pv478l31m2rtgtu986j</camunda:inputParameter>
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
-       "problem": v_content,
+       "problem": v_content_orig,
 	"solution": ticket_solution,
 	"email": v_email,
 	"incident_number": v_incident_number
@@ -319,7 +319,7 @@
             <camunda:inputParameter name="payload">
               <camunda:script scriptFormat="JavaScript">out=JSON.stringify({
    "b_key" : v_incident_number,
-     "problem": v_content,
+     "problem": v_content_orig,
 	"solution": ticket_solution
 });</camunda:script>
             </camunda:inputParameter>
