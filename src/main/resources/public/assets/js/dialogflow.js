@@ -277,7 +277,7 @@
 					var elText = 	$(element);
 					var text = elText.find("div").text();
 					console.log(text);
-					userRequests += text + " ### ";
+					userRequests += text + " --- ";
 				//	var elText = 	$(element) " > div").text();
   				//console.log( elText);
 					//userRequests += elText;
