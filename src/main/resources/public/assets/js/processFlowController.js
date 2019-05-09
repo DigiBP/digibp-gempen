@@ -121,9 +121,16 @@ ProcessFlowController.prototype.registerEventHandlers = function(){
   ProcessFlowController.prototype.getUserInstanceVariables = function(){
     var _this = this;
     var userName = $("#employeeName").val();
+		var userHirarchyLvl = 1;
+		try{
+		userHirarchyLvl =	_this.getUserObjectByName(userName).level
+		}catch(err){
+			console.log("unknown user");
+		}
+
     var userInstanceVariables ={
      userName :userName,
-     hirarchyLevel : _this.getUserObjectByName(userName).level,
+     hirarchyLevel : userHirarchyLvl,
       preventWork : $("input[name='preventWork']:checked").val(),
       onSite : $("input[name='onSite']:checked").val(),
       voulnerable : $("input[name='voulnerable']:checked").val(),
