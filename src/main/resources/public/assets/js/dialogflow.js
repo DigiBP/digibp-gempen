@@ -155,7 +155,7 @@
 					var trElementButtons;
 					$(result.fulfillment.messages).each(function(index,element){
 						if (element.type == 1) {
-							trElement.find(".list-group").append("<a class='list-group-item'  target='_blank' href='http://kb.winmed.ch/files"+element.imageUrl+"'><h4 class='list-group-item-heading'>"+element.title+"</h4><p class='list-group-item-text'>Knowledgebase Artikel</p></a>");
+							trElement.find(".list-group").append("<a class='list-group-item'  target='_blank' href='"+element.imageUrl+"'><h4 class='list-group-item-heading'>"+element.title+"</h4><p class='list-group-item-text'>Knowledgebase Artikel</p></a>");
 						} else if (element.type == 4) {
 							trElementButtons = parseType4(element).contents();
 						}
