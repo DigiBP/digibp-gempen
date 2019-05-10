@@ -226,7 +226,7 @@
 					//var trElement = $("<div><h4>"+result.fulfillment.speech+"</h4><hr /><div class='list-group'></div></div>");
 					var trElement = $("<div><div class='list-group'></div></div>");
 
-					trElement.find(".list-group").append("<a class='list-group-item' target='_blank' href='http://kb.winmed.ch/files"+element.payload.imageUrl+"'><h4 class='list-group-item-heading'>"+element.payload.title+"</h4><p class='list-group-item-text'>Knowledgebase Artikel</p></a>");
+					trElement.find(".list-group").append("<a class='list-group-item' target='_blank' href='"+element.payload.imageUrl+"'><h4 class='list-group-item-heading'>"+element.payload.title+"</h4><p class='list-group-item-text'>Knowledgebase Artikel</p></a>");
 					return trElement.contents();
 				//	messageContainer.find(".alert").append(trElementButtons);
 				}

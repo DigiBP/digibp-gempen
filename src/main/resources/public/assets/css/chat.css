@@ -46,7 +46,8 @@ div#header {
 .footer {
 	background-color: #335cb5;
 	/*background-color: #018ee1;*/
-	position: fixed;
+/*	position: fixed; */
+	margin-top: 25px;
 	bottom: 0;
 	padding: 10px;
 	color: white;
