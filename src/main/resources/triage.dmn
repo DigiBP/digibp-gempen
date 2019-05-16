@@ -15,7 +15,7 @@
           <text>work_impact</text>
         </inputExpression>
       </input>
-      <input id="InputClause_0ttfob6" label="Is it making the process vulnerable?">
+      <input id="InputClause_0ttfob6" label="is it compliance relevant?">
         <inputExpression id="LiteralExpression_0fec408" typeRef="boolean">
           <text>legal</text>
         </inputExpression>
