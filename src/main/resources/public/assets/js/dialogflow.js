@@ -271,7 +271,7 @@
 
 		function getAllUserRequests(){
 
-				var userRequests = "Chat content:  ";
+				var userRequests = "Chatbot:  ";
 			$( ".user-request" ).each(function( index , element) {
 
 					var elText = 	$(element);
