@@ -195,6 +195,13 @@ console.log(incidentLevel);
            $("#highPrioForm").removeClass("hidden");
            $("#startForm").addClass("hidden");
 
+					 if($("#language :selected").val() == "DE"){
+						 	 $("#prioHeaderMsg").text("Sie sind für den Priority-Support qualifiziert. Bitte schildern Sie uns kurz Ihr Problem.");
+							 $("#prioFormButton").val("Senden");
+							 $("#prioTitle").text("Ihr Anliegen:");
+					 }
+
+
          }else{
            incidentLevel = "low";
            $("#chatbot").removeClass("hidden");
