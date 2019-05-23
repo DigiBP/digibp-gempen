@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico">-->
+
+    <title>Chatbot</title>
+
+    <!-- Bootstrap core CSS
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<link href="bootstrap/dist/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this template -->
+
+
+<link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/chat.css" rel="stylesheet">
+
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+	<div id="header">
+		<img id="header-logo" src="assets/img/logo.jpeg" height ="125%" alt="" />
+	</div>
+
+    <div class="container">
+
+      <div class="row" id="startForm">
+          <div class="col-md-12">
+
+            <h1>Welcome to the support area</h1>
+            <p>Please provide us with some information to your request</p>
+            <form>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="employeeName" aria-describedby="nameHelp" placeholder="Enter your Name">
+                <small id="nameHelp" class="form-text text-muted">Please provide your name that we can identify your request.</small>
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="text" class="form-control" id="employeeEmail" aria-describedby="emailHelp" type="email" placeholder="Enter your E-Mail">
+                <small id="emailHelp" class="form-text text-muted">Please provide your email address so that we can get back to you.</small>
+              </div>
+              <div class="form-group">
+                <label for="language">Your Language</label>
+
+                <select class="form-control" id="language">
+                  <option value="EN">EN</option>
+                  <option value="DE">DE</option>
+
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="preventWork">Does it prevent you from work?</label>
+                <label class="radio-inline"><input type="radio" value="true" name="preventWork" checked>Yes</label>
+                <label class="radio-inline"><input type="radio" value="false" name="preventWork">No</label>
+              </div>
+              <div class="form-group">
+                <label for="onSite">Are you on site?</label>
+                <label class="radio-inline"><input type="radio" value="true" name="onSite" checked>Yes</label>
+                <label class="radio-inline"><input type="radio" value="false"  name="onSite">No</label>
+              </div>
+              <div class="form-group">
+                <label for="voulnerable">Is it compliance relevant?</label>
+                <label class="radio-inline"><input type="radio" value="true" name="voulnerable" checked>Yes</label>
+                <label class="radio-inline"><input type="radio" value="false"  name="voulnerable">No</label>
+              </div>
+
+              <input type="button" class="btn btn-default" id="startFormBtn" value="Request Help!">
+            </form>
+          </div>
+        </div>
+
+            <div  id="ticketCreatedArea" class="row hidden">
+              <div class="row mb-xl">
+                <div class="col-md-12">
+                      <h2>Ticket Created!</h2>
+
+                </div>
+              </div>
+            </div>
+
+        <!---high priority Form-->
+        <div  id="highPrioForm" class="row hidden">
+
+
+                    <div class="row mb-xl">
+                      <div class="col-md-12">
+                            <h2>Priority Support</h2>
+                          <span id="prioHeaderMsg"> You are qualified for priority support. Please provide us with your request. We will call you back as soon as possible</span>
+                      </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-4">
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                            <h3 class="panel-title"><b>Information</b></h3>
+                            </div>
+                            <div class="panel-body example-questions">
+                            User: <span class="userNameSpan"></span><br/>
+                          Severity: <span class="severentySpan"></span><br/>
+
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-md-8">
+
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                            <h3 class="panel-title" id="prioTitle"><b>Your Request:</b></h3>
+                            </div>
+                            <div class="panel-body example-questions">
+                          <div class="form-group">
+
+                          <textarea class="form-control" rows="5" id="highPrioRequest"></textarea>
+                          </div>
+
+                            <input type="button" id="prioFormButton" value="Send request">
+                          </div>
+                        </div>
+                        </div>
+              </div>
+            </div><!--//END-high priority Form-->
+
+<!---chatbot-->
+      <div id="chatbot" class="row hidden">
+        <div class="row mb-xl">
+          <div class="col-md-12">
+                <h2>Chatbot Support</h2>
+              <span id="chatbotHeaderMsg"> Please ask the chatbot for help. If you can not find an answer, you can create a ticket later.</span>
+          </div>
+        </div>
+        		<div class="row ">
+        			<div class="col-md-4">
+        				<div class="panel panel-default">
+        				  <div class="panel-heading">
+        					<h3 class="panel-title"><b>Information</b></h3>
+        				  </div>
+        				  <div class="panel-body example-questions">
+        					User: <span class="userNameSpan"></span><br/>
+        				Severity: <span class="severentySpan"></span><br/>
+
+        				  </div>
+        				</div>
+
+        			</div>
+        			<div class="col-md-8 table-responsive">
+        				<table class="table" id="responseTable">
+        					<tbody>
+        					</tbody>
+        				</table>
+        			</div>
+        		</div>
+        		<div class="row ">
+        			<div class="col-md-4">
+        			</div>
+        			<div class="col-md-8">
+
+        				<form class="form" action="#">
+        				    <div class="input-group">
+        					  <input type="text" class="form-control" id="input" placeholder="Text eingeben um zu chatten..." autocomplete="off">
+        					  <span class="input-group-btn">
+
+<input type="button" id="send" class="btn btn-default" value="Chat">
+        					  </span>
+        					</div>
+        				</form>
+        			</div>
+        		</div>
+          </div><!---END chatbot-->
+		<div class="row hidden">
+		<br>Response<br> <textarea id="response" cols="140" rows="20"></textarea>
+		</div>
+
+      </div>
+
+      <div class="footer" style="margin-top:40px;" >
+    			<div class="container">
+    				<div class="col-md-8">
+    					<p>
+    							© Copyright Gempen DigiBP AG</a>, All Rights
+    							Reserved - <i><b></b></i>
+    						</p>
+    				</div>
+    				<div class="col-md-4">
+    									<span style="padding-right: 15px;"></span>
+
+    				</div>
+
+    </div>
+    </div>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/camundaManager.js"></script>
+<script src="assets/js/processFlowController.js"></script>
+  <!--  <script src="assets/js/ajax.js"></script> -->
+    <script src="assets/js/dialogflow.js"></script>
+
+
+  </body>
+</html>
