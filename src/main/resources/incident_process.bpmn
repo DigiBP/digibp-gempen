@@ -344,7 +344,7 @@
           <camunda:formField id="ticket_solution" label="Solution" type="string" />
           <camunda:formField id="new_kb" label="New KB entry?" type="boolean" defaultValue="false" />
           <camunda:formField id="kbEntry" label="Existing KB Entry" type="string" />
-          <camunda:formField id="employeePrio" label="Employee Priorisation" type="string" />
+          <camunda:formField id="employeePrio" label="Ticket Priorisation" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1dcvi5e</bpmn:incoming>
