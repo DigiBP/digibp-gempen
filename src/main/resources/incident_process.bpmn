@@ -216,7 +216,7 @@
       <bpmn:outgoing>SequenceFlow_14m4kju</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_13ndsmv</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_15f2bp7" name="Fill Knowledge Base">
+    <bpmn:userTask id="Task_15f2bp7" name="Fill Knowledge Base" camunda:assignee="helpdeskagent">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="newKBContent" label="Content of new KB entry" type="string" />
@@ -337,7 +337,7 @@
       <bpmn:incoming>SequenceFlow_06396sf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1y0f7ru</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:userTask id="Task_0ewox07" name="Solve Ticket">
+    <bpmn:userTask id="Task_0ewox07" name="Solve Ticket" camunda:assignee="helpdeskagent">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="v_content" label="Problem" type="string" />
