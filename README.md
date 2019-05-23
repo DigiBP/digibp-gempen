@@ -16,16 +16,16 @@
 * Oliver F.
 * David M. 
 
-#Quicklinks
+# Quicklinks
 Camunda Platform - https://gempen.herokuapp.com 
 Incident Reporting Form - https://gempen.herokuapp.com/triage.html 
 
-#Methodology and Approach
+# Methodology and Approach
 We started the project outlining the corner parts of the whole process. 
 To add complexity, we implemented a chatbot with the ability to translate from different languages to find a solution and give back a possible solution in the user’s language. 
 We used the agile approach with weekly sprints.
 
-#Design Approach
+# Design Approach
 We started our journey designing process and decision table using Camunda, we walked through Cloud services, deployment tools, and integrations, and we finally ended up on AI and Chatbots. Some of the gathered knowledge in the semester was used to build the solution here presented; more technical details about each tool utilization can be found below.
 
 ## Collaboration
