@@ -7,7 +7,7 @@
                                                                           
 | Summary | Quicklinks |
 | ------------------ | - |
-|This repository contains an incident management workflow running on [Camunda BPM](https://docs.camunda.org). This repository is part of the group assignment of the Digitalization of the Business Processes Module at the FHNW. Check out our [Presentation Slides](https://##) to get an overview of the process as well as the tools and technologies used. | [Camunda BPN Incident Management]( https://saentisincident.herokuapp.com/ ) - [PHP Web Incident Management](https://saentisincident-php.herokuapp.com/) -  [Create an Issue by E-Mail](mailto:t700agmb@robot.zapier.com)|
+|This repository contains an incident management workflow running on [Camunda BPM](https://docs.camunda.org).
 
 *Authors*
 * Rafael R.
@@ -55,7 +55,7 @@ The following technologies has been used for implementing the process.
 | Technology  | Description |
 | ------------- | ------------------ |
 |Camunda Modeler  | The Camunda Modeler is used to create BPMN and DMN models. |
-|Camunda Platform Version | |
+|Camunda Platform | |
 |Standard Web Technologies | HTML, CSS and JavaScript is used to create the webfronted and process flow |
 |Integromat |  |
 |GitHub| Github is used for collaboration and versioning of the programming code as well as the models. |
