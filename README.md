@@ -91,7 +91,7 @@ In the first phase, the decision is made if either the user has to use the chatb
 ![Triage process](src/main/resources/doc/triage_process.png)
 
 
-### Ticket creation process
+### Ticket Creation Process
 In this process the creation of a ticket, either open or closed is described.
 
 ![Ticket creation process](src/main/resources/doc/ticket_creation_process.png)
@@ -191,7 +191,7 @@ Also, problem-solving cannot be modeled in BPMN because it is strongly dependent
 ![CMMN Solve Ticket](src/main/resources/doc/solve_ticket.png)
 
 
-## Create KnowledgeBase entry
+## Create KnowledgeBase Entry
 We store the suggested solution in a knowledge base. We create a record in Google Sheets, which is called “knowledgebase_db”.
 
 ![Create a row with a suggested solution in Google Sheets “knowledgebase_db”](src/main/resources/doc/integromat_create_kb.png)
@@ -297,8 +297,9 @@ The following technologies has been used for implementing the process.
 |Integromat | Used as service integration to manage the service sided interactions, like Google Sheets and emails. |
 |GitHub| Github is used for collaboration and versioning of the programming code as well as the models. |
 |Heroku|Heroku is a PaaS (Platform as a Services) which is used to quickly build, run, and operate the Camunda in the cloud. |
-|Yandex Translate API|Heroku is a PaaS (Platform as a Services) which is used to quickly build, run, and operate the Camunda in the cloud. |
+|Yandex Translate API| Yandex Translate is an free API provided by the Russian search enginge Yandex |
 |Text Editor |Generic text editor |
+|Google Sheets | Online hosted sheets provide by Google, used as a simple database to store data|
 
 
 ## Instructions for Testing
