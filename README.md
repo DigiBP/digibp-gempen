@@ -122,7 +122,7 @@ The following image shows a comprehensive visualization of our closing process.
 ## Roles
 We have defined two roles in our process; one is the incident reporter, the other the helpdesk agent who solves the issue.
 
-### Incident reporter
+### Incident Reporter
 The issue is commonly created as incident management. The incident reporter usually is the end-user who has an issue she or he wants to report to the helpdesk staff. The initial process creates a ticket that describes the issue details depending on the hierarchy level. The incident reporter correspondingly gets an e-mail as the feedback on how is the issue is getting proceeded. If the incident reporter needs VIP support, then it is done immediately, or with less hierarchy level leads to the chatbot. Once the issue is solved, the ticket is closed, and the confirmation is sent by email to the incident reported (i.e., end-user).
 
 ### Helpdesk Agent
