@@ -32,7 +32,7 @@ Camunda Platform - https://gempen.herokuapp.com
 Incident Reporting Form - https://gempen.herokuapp.com/triage.html 
 * See “instructions for Testing”
 
-Presentation
+Presentation - https://github.com/DigiBP/digibp-gempen/blob/master/src/main/resources/doc/presentation.pdf
 
 
 
@@ -197,7 +197,7 @@ We also send a preformatted e-mail to the requester depending on the language se
 ## Close Ticket (German Language)
 Once the problem is solved, the ticket is closed. There are two possible ways; either if the customer is satisfied with the solution, the chatbot offered or if the problem was solved by the helpdesk agent. If the incident claim was in German, we translate the accepted solution into English before updating the incident data in Google Sheets “incident_db” using webhooks and text. 
 We also send a preformatted e-mail to the requester depending on the language selected.
-![Update data in Google Sheets “incident_db” and sending e-mail (German language)”](src/main/resources/doc/integromat_close_ticket_english.png)
+![Update data in Google Sheets “incident_db” and sending e-mail (German language)”](src/main/resources/doc/integromat_close_ticket_german.png)
 
 
 
@@ -290,7 +290,7 @@ The following technologies has been used for implementing the process.
 |Text Editor |Generic text editor |
 
 
-##Instructions for Testing
+## Instructions for Testing
 With these simple steps, you test the incident management process.
 * Open the Gempen Heroku App (https://gempen.herokuapp.com/triage.html)
 * We consider that you are an employee of our company and your data is stored in our employee database. Therefore you have to use one of the names according to Table 2, only with these names we can check your hierarchy level.
@@ -300,7 +300,7 @@ With these simple steps, you test the incident management process.
 
 The hierarchy level is part of the decision table and changes the severity of the incident. I.e., if the hierarchy level is 5, then the chatbot is circumvented, and the incident is guided directly to the helpdesk staff. All others are directed to the chatbot first.
 
-#Further Enhancements
+# Further Enhancements
 
 As mentioned before, our case was developed for an international company with support for English and German speaking employees; we can follow the same structure and tools for developing new languages according to other companies demand.
 The current structure also allows us to adapt the service for a more complex IT support hierarchy, with some additional intents on Dialogflow and expanding the decision table these tools can make an even more accurate classification of each request and even can redirect to different queues.
