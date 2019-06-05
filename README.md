@@ -1,38 +1,22 @@
 # DigiBP Gempen Incident Management
-```
-          _____                    _____                    _____                    _____                    _____                    _____          
-         /\    \                  /\    \                  /\    \                  /\    \                  /\    \                  /\    \         
-        /::\    \                /::\    \                /::\____\                /::\    \                /::\    \                /::\____\        
-       /::::\    \              /::::\    \              /::::|   |               /::::\    \              /::::\    \              /::::|   |        
-      /::::::\    \            /::::::\    \            /:::::|   |              /::::::\    \            /::::::\    \            /:::::|   |        
-     /:::/\:::\    \          /:::/\:::\    \          /::::::|   |             /:::/\:::\    \          /:::/\:::\    \          /::::::|   |        
-    /:::/  \:::\    \        /:::/__\:::\    \        /:::/|::|   |            /:::/__\:::\    \        /:::/__\:::\    \        /:::/|::|   |        
-   /:::/    \:::\    \      /::::\   \:::\    \      /:::/ |::|   |           /::::\   \:::\    \      /::::\   \:::\    \      /:::/ |::|   |        
-  /:::/    / \:::\    \    /::::::\   \:::\    \    /:::/  |::|___|______    /::::::\   \:::\    \    /::::::\   \:::\    \    /:::/  |::|   | _____  
- /:::/    /   \:::\ ___\  /:::/\:::\   \:::\    \  /:::/   |::::::::\    \  /:::/\:::\   \:::\____\  /:::/\:::\   \:::\    \  /:::/   |::|   |/\    \ 
-/:::/____/  ___\:::|    |/:::/__\:::\   \:::\____\/:::/    |:::::::::\____\/:::/  \:::\   \:::|    |/:::/__\:::\   \:::\____\/:: /    |::|   /::\____\
-\:::\    \ /\  /:::|____|\:::\   \:::\   \::/    /\::/    / ~~~~~/:::/    /\::/    \:::\  /:::|____|\:::\   \:::\   \::/    /\::/    /|::|  /:::/    /
- \:::\    /::\ \::/    /  \:::\   \:::\   \/____/  \/____/      /:::/    /  \/_____/\:::\/:::/    /  \:::\   \:::\   \/____/  \/____/ |::| /:::/    / 
-  \:::\   \:::\ \/____/    \:::\   \:::\    \                  /:::/    /            \::::::/    /    \:::\   \:::\    \              |::|/:::/    /  
-   \:::\   \:::\____\       \:::\   \:::\____\                /:::/    /              \::::/    /      \:::\   \:::\____\             |::::::/    /   
-    \:::\  /:::/    /        \:::\   \::/    /               /:::/    /                \::/____/        \:::\   \::/    /             |:::::/    /    
-     \:::\/:::/    /          \:::\   \/____/               /:::/    /                  ~~               \:::\   \/____/              |::::/    /     
-      \::::::/    /            \:::\    \                  /:::/    /                                     \:::\    \                  /:::/    /      
-       \::::/    /              \:::\____\                /:::/    /                                       \:::\____\                /:::/    /       
-        \::/____/                \::/    /                \::/    /                                         \::/    /                \::/    /        
-                                  \/____/                  \/____/                                           \/____/                  \/____/         
-                                                                                                                                                      
-
+```    ___          ___          ___          ___          ___          ___     
+     /\  \        /\  \        /\__\        /\  \        /\  \        /\__\    
+    /::\  \      /::\  \      /::|  |      /::\  \      /::\  \      /::|  |   
+   /:/\:\  \    /:/\:\  \    /:|:|  |     /:/\:\  \    /:/\:\  \    /:|:|  |   
+  /:/  \:\  \  /::\~\:\  \  /:/|:|__|__  /::\~\:\  \  /::\~\:\  \  /:/|:|  |__ 
+ /:/__/_\:\__\/:/\:\ \:\__\/:/ |::::\__\/:/\:\ \:\__\/:/\:\ \:\__\/:/ |:| /\__\
+ \:\  /\ \/__/\:\~\:\ \/__/\/__/~~/:/  /\/__\:\/:/  /\:\~\:\ \/__/\/__|:|/:/  /
+  \:\ \:\__\   \:\ \:\__\        /:/  /      \::/  /  \:\ \:\__\      |:/:/  / 
+   \:\/:/  /    \:\ \/__/       /:/  /        \/__/    \:\ \/__/      |::/  /  
+    \::/  /      \:\__\        /:/  /                   \:\__\        /:/  /   
+     \/__/        \/__/        \/__/                     \/__/        \/__/    
 ```
 
 ## License
 
 - [Apache License, Version 2.0](https://github.com/DigiBP/digibp-archetype-camunda-boot/blob/master/LICENSE)
 
-                                                                          
-| Summary | Quicklinks |
-| ------------------ | - |
-|This repository contains an incident management workflow running on [Camunda BPM](https://docs.camunda.org).
+                                                                   
 
 *Authors*
 * Rafael R.
@@ -90,7 +74,7 @@ In this new model, Gempen Company trained a few IT analysts to remain on site as
 We developed a smart incident management tool that consists of a chatbot that proposes predefined solutions, classifies the priority according to the info given by the employee, and creation of an incident ticket.
 
 
-![BPMN model of the overall process](/doc/incident_process.png)
+![BPMN model of the overall process](src/main/resources/doc/incident_process.png)
 
 To start a new issue request, you have to fill out the web-form (https://gempen.herokuapp.com/triage.html). Type if you are on site and if the issue is stopping you from working and if it is compliance relevant because the issue is making the company vulnerable.
 
@@ -98,14 +82,16 @@ To start a new issue request, you have to fill out the web-form (https://gempen.
 ## Main Phases
 The process is divided into three phases:
 
-![Triage process](/doc/triage_process.png)
+![Triage process](src/main/resources/doc/triage_process.png)
+
+In the first phase, the decision is made if either the user has to use the chatbot or is eligible for VIP support.
 
 
+2.	Ticket creation process
+In this process the creation of a ticket, either open or closed is described.
 
 
-
-
-
+![Ticket creation process](src/main/resources/doc/ticket_creation_process.png)
 
 
 ## Technology
