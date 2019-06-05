@@ -97,6 +97,7 @@ In this process the creation of a ticket, either open or closed is described.
 ![Ticket creation process](src/main/resources/doc/ticket_creation_process.png)
 
 If the problem was solved by the chatbot, a closed ticket is created. If it is a VIP or the problem could not be solved by the chatbot, an open ticket is created and an confirmation mail is sent to the user.
+
 a)	VIP or chatbot: If the problem is unresolved, an ‘open’ ticket is automatically created which is added to the list for the helpdesk team. They then call the user back.
 
 b)	Chatbot: If the problem is solved, the user selects [Problem solved], a ‘closed’ ticket is automatically created – To reduce information overload, no e-mail is sent to the customer because he already knows that the issue is resolved.
