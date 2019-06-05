@@ -96,14 +96,6 @@ a)	VIP or chatbot: If the problem is unresolved, an ‘open’ ticket is automat
 b)	Chatbot: If the problem is solved, the user selects [Problem solved], a ‘closed’ ticket is automatically created – To reduce information overload, no e-mail is sent to the customer because he already knows that the issue is resolved.
 
 
-#### Chatbot Intents
-The chatbot can handle the following intents both in english and german:
-
-* pc is slow
-* error message
-* install new software
-* forgott my password
-
 
 ### Diagnosis and Solving Process
 Diagnosis Process (with knowledge base, translation and solving)
@@ -206,14 +198,12 @@ We also send a preformatted e-mail to the requester depending on the language se
 
 
 
-
-
 # Camunda Processes Step by Step Guide
 
 Based on on the business logic during the triage process you either can request help directly as mentioned in earlier chapters or chat with a bot.
 
 
-## Issue Creation Process
+## Issue Creation Process (via WebForm)
 To report an incident, you fill out the web form https://gempen.herokuapp.com/triage.html.
 
 
@@ -227,22 +217,51 @@ To report an incident, you fill out the web form https://gempen.herokuapp.com/tr
 6.	Choose if the issue is compliance relevant (default value is ‘No’)
 7.	Submit the request
 
+## Issue Creation Process (via ChatBot)
+If you are not a VIP, the chatbot is started to help you with the issue.
+
+![Chatbot interface](src/main/resources/doc/bot1.png)
+
+1.	Enter the issue in the text field and click the chat button
+
+![Chatbot resolved the issue, Yes or No](src/main/resources/doc/bot2.png)
+
+1.	If the solution which the chatbot suggested was helpful, you could click the button. Yes, my problem is solved; else you click on No, I want to speak to a human. 
+After that either the ticket is closed, or the issue is escalated to the human helpdesk agent who contacts the user after a short time.
+
+After every response, the chatbot asks you if you are satisfied with the answer.
+### Chatbot Intents
+The chatbot can handle the following intents both in english and german:
+
+* pc is slow
+* error message
+* install new software
+* forgott my password
+
+
 
 ## Helpdesk Agent
 
 Go to http://gempen.herokuapp.com/
 
-![Camunda Platform Complete Ticket](src/main/resources/doc/step1.png)
-
-
-
 Login credentials:
-*Username: helpdeskagent
-*Password: helpdeskagent 
+* Username: helpdeskagent
+* Password: helpdeskagent
 
 This is the web application for tracking the ticketing process. The Camunda requests the user name and password to monitor the incident processing level. 
 The helpdesk agent has a complete version of each ticket, as when occurred, why details. The Task list numbers the open incidents to solve according to the priority and compliance as explained before. Each ticket is labeled with ID, Date Created, Version, priority level, Status. 
 The ticket is completed on the priority level red, yellow or green. The red is deployed immediate action, and others are done within some days. The low priority level has a chatbot communication with the user language instantly.  As the Helpdesk Agent is only English speaking the feedback is translated to the user's language and sends to the user email as the ticket is closed. 
+
+
+![Camunda Platform Helpdesk agent web application welcome page](src/main/resources/doc/camunda_complete_ticket0.png)
+1.	Click on Tasklist to open the list of open issue requests
+
+![Helpdesk agent management web application](src/main/resources/doc/camunda_complete_ticket.png)
+
+2.	Click on any ticket in the list
+3.	After finding the solution enter the solution into the field Solution
+4.	If it is a new KB entry, click the box New KB entry
+5.	Click the button Complete to close the ticket
 
 
 # Developer Documentation
@@ -286,4 +305,4 @@ The current structure also allows us to adapt the service for a more complex IT 
 Enjoy
 
 
-~EOF~
+- [x] EOF
