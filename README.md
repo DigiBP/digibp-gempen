@@ -87,21 +87,25 @@ The process is divided into three phases:
 
 ### Triage Logic
 In the first phase, the decision is made if either the user has to use the chatbot or is eligible for VIP support.
+
 ![Triage process](src/main/resources/doc/triage_process.png)
 
 
 ### Ticket creation process
 In this process the creation of a ticket, either open or closed is described.
+
 ![Ticket creation process](src/main/resources/doc/ticket_creation_process.png)
 
 If the problem was solved by the chatbot, a closed ticket is created. If it is a VIP or the problem could not be solved by the chatbot, an open ticket is created and an confirmation mail is sent to the user.
 a)	VIP or chatbot: If the problem is unresolved, an ‘open’ ticket is automatically created which is added to the list for the helpdesk team. They then call the user back.
+
 b)	Chatbot: If the problem is solved, the user selects [Problem solved], a ‘closed’ ticket is automatically created – To reduce information overload, no e-mail is sent to the customer because he already knows that the issue is resolved.
 
 
 
 ### Diagnosis and Solving Process
 Diagnosis Process (with knowledge base, translation and solving)
+
 ![Diagnosis and solving process](src/main/resources/doc/diagnosis_and_solving_process.png)
 
 In the second phase, the flow is depending on the language the issue reporter is speaking. If it is not English, a translation of the request is done by invoking an external service before sending the request to the support staff. 
@@ -110,6 +114,7 @@ After that the knowledge base is consulted before solving the ticket issue.
 
 ### Closing Process
 The following image shows a comprehensive visualization of our closing process.
+
 ![Diagnosis and solving process](src/main/resources/doc/closing_process.png)
 
 
@@ -140,7 +145,6 @@ We used Google Sheets to store and retrieve data. The data is used in various va
 
 
 
-
 ## Ticket Creation
 Creates a row with the incident data in Google Sheets and send an email to the requester in the corresponding language. The text for each language of the confirmation e-mail is stored with variables.
 
@@ -168,35 +172,41 @@ Get the hierarchy level from employees database (simulating an intranet platform
 If the hierarchy level of a person is above 5, the chatbot is circumvented, and the ticket is directly sent to the helpdesk agent who is going personally to the person with the incident. If the person is off-site, the helpdesk agent is calling back within a few minutes. 
 This kind of VIP support is only available to the upper management level persons. 
 There is only one exception if your hierarchy level 4 and the incident is preventing you from work, and it is compliance relevant; then you also get VIP support to get the request solved as soon as possible.  
+
 ![Decision table of incident triage](src/main/resources/doc/triage.png)
 
 
 ## Translate Problem
 With this function, we enable users to formulate an issue in German (more languages can be added later). All our helpdesk agents are English speakers. 
 Therefore every ticket that is submitted in another language than English must be translated into English first. We use Yandex API to translate the ticket into English to ensure that the helpdesk agent understands the request.
+
 ![Decision table of incident triage](src/main/resources/doc/integromat_translate_problem.png)
 
 
 ## Solve Ticket
 The problem analysis is not a structured process (CMMN). It can include different behaviors of the helpdesk agent. Some are depending on the level of support, others on the language. I.e., if the person is on-site but speaks another language than English, the helpdesk agent must assure that an interpreter can accompany if the problem is severe and onsite intervention is necessary. Alternatively, the helpdesk agent must organize someone in the subsidiary to guarantee onsite support for the VIP.
 Also, problem-solving cannot be modeled in BPMN because it is strongly dependent on the actual scenario.
+
 ![CMMN Solve Ticket](src/main/resources/doc/solve_ticket.png)
 
 
 ## Create KnowledgeBase entry
 We store the suggested solution in a knowledge base. We create a record in Google Sheets, which is called “knowledgebase_db”.
+
 ![Create a row with a suggested solution in Google Sheets “knowledgebase_db”](src/main/resources/doc/integromat_create_kb.png)
 
 
 ## Close Ticket (English Language)
 Once the problem is solved, the ticket is closed. There are two possible ways; either if the customer is satisfied with the solution, the chatbot offered or if the problem was solved by the helpdesk agent. We update the incident data in Google Sheets “incident_db” using webhooks and text. 
 We also send a preformatted e-mail to the requester depending on the language selected. If the incident claim was in English, the e-mail is sent right away.
+
 ![Update data in Google Sheets “incident_db” and sending e-mail (English language)”](src/main/resources/doc/integromat_close_ticket_english.png)
 
 
 ## Close Ticket (German Language)
 Once the problem is solved, the ticket is closed. There are two possible ways; either if the customer is satisfied with the solution, the chatbot offered or if the problem was solved by the helpdesk agent. If the incident claim was in German, we translate the accepted solution into English before updating the incident data in Google Sheets “incident_db” using webhooks and text. 
 We also send a preformatted e-mail to the requester depending on the language selected.
+
 ![Update data in Google Sheets “incident_db” and sending e-mail (German language)”](src/main/resources/doc/integromat_close_ticket_german.png)
 
 
@@ -229,7 +239,7 @@ If you are not a VIP, the chatbot is started to help you with the issue.
 
 ![Chatbot resolved the issue, Yes or No](src/main/resources/doc/bot2.png)
 
-1.	If the solution which the chatbot suggested was helpful, you could click the button. Yes, my problem is solved; else you click on No, I want to speak to a human. 
+2.	If the solution which the chatbot suggested was helpful, you could click the button. Yes, my problem is solved; else you click on No, I want to speak to a human. 
 After that either the ticket is closed, or the issue is escalated to the human helpdesk agent who contacts the user after a short time.
 
 After every response, the chatbot asks you if you are satisfied with the answer.
