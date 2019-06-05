@@ -12,13 +12,13 @@
      \/__/        \/__/        \/__/                     \/__/        \/__/    
 ```
 
-## License
+# License
 
 - [Apache License, Version 2.0](https://github.com/DigiBP/digibp-archetype-camunda-boot/blob/master/LICENSE)
 
                                                                    
 
-*Authors*
+# Authors
 * Rafael R.
 * Resheka D.
 * Roland H.
@@ -82,37 +82,39 @@ To start a new issue request, you have to fill out the web-form (https://gempen.
 ## Main Phases
 The process is divided into three phases:
 
+### Triage Logic
+In the first phase, the decision is made if either the user has to use the chatbot or is eligible for VIP support.
 ![Triage process](src/main/resources/doc/triage_process.png)
 
-In the first phase, the decision is made if either the user has to use the chatbot or is eligible for VIP support.
 
-
-2.	Ticket creation process
+### Ticket creation process
 In this process the creation of a ticket, either open or closed is described.
-
-
 ![Ticket creation process](src/main/resources/doc/ticket_creation_process.png)
-
-
 
 If the problem was solved by the chatbot, a closed ticket is created. If it is a VIP or the problem could not be solved by the chatbot, an open ticket is created and an confirmation mail is sent to the user.
 a)	VIP or chatbot: If the problem is unresolved, an ‘open’ ticket is automatically created which is added to the list for the helpdesk team. They then call the user back.
 b)	Chatbot: If the problem is solved, the user selects [Problem solved], a ‘closed’ ticket is automatically created – To reduce information overload, no e-mail is sent to the customer because he already knows that the issue is resolved.
 
 
-3.	Diagnosis and Solving Process
+#### Chatbot Intents
+The chatbot can handle the following intents both in english and german:
+
+* pc is slow
+* error message
+* install new software
+* forgott my password
+
+
+### Diagnosis and Solving Process
 Diagnosis Process (with knowledge base, translation and solving)
-
-
 ![Diagnosis and solving process](src/main/resources/doc/diagnosis_and_solving_process.png)
 
 In the second phase, the flow is depending on the language the issue reporter is speaking. If it is not English, a translation of the request is done by invoking an external service before sending the request to the support staff. 
 After that the knowledge base is consulted before solving the ticket issue.
 
 
-4.	Closing Process
+### Closing Process
 The following image shows a comprehensive visualization of our closing process.
-
 ![Diagnosis and solving process](src/main/resources/doc/closing_process.png)
 
 
@@ -142,20 +144,146 @@ The illustration shows the overall architecture design of our incident managemen
 We used Google Sheets to store and retrieve data. The data is used in various variables throughout the process.
 
 
+
+
+## Ticket Creation
+Creates a row with the incident data in Google Sheets and send an email to the requester in the corresponding language. The text for each language of the confirmation e-mail is stored with variables.
+
+
+![Incident Database](src/main/resources/doc/incident_db.png)
+Data structure
+
+
+![Creating a row in Google Sheets and sending e-mail to the requester](src/main/resources/doc/integromat_create_incident.png)
+As soon an incident is stored in the Google sheets, an e-mail is sent to the person who requested assistance automatically. Dependent on the language of the person, an e-mail template text in the corresponding language is used to fill in the variables like the name. 
+This e-mail is then sent to the person as confirmation.
+
+
+
+## Get Hierarchy Level
+The hierarchy level for each employee is stored in the Google Sheets “employees_db”. There are six hierarchy levels, ranging from none to five, where five is the highest hierarchy level. Hierarchy level five is the top management; they receive VIP support.
+Get the hierarchy level from employees database (simulating an intranet platform)
+
+
+![Get hierarchy level for employee from google sheet](src/main/resources/doc/integromat_get_level.png)
+
+
+
+## Decision Table
+If the hierarchy level of a person is above 5, the chatbot is circumvented, and the ticket is directly sent to the helpdesk agent who is going personally to the person with the incident. If the person is off-site, the helpdesk agent is calling back within a few minutes. 
+This kind of VIP support is only available to the upper management level persons. 
+There is only one exception if your hierarchy level 4 and the incident is preventing you from work, and it is compliance relevant; then you also get VIP support to get the request solved as soon as possible.  
+![Decision table of incident triage](src/main/resources/doc/triage.png)
+
+
+## Translate Problem
+With this function, we enable users to formulate an issue in German (more languages can be added later). All our helpdesk agents are English speakers. 
+Therefore every ticket that is submitted in another language than English must be translated into English first. We use Yandex API to translate the ticket into English to ensure that the helpdesk agent understands the request.
+![Decision table of incident triage](src/main/resources/doc/integromat_translate_problem.png)
+
+
+## Solve Ticket
+The problem analysis is not a structured process (CMMN). It can include different behaviors of the helpdesk agent. Some are depending on the level of support, others on the language. I.e., if the person is on-site but speaks another language than English, the helpdesk agent must assure that an interpreter can accompany if the problem is severe and onsite intervention is necessary. Alternatively, the helpdesk agent must organize someone in the subsidiary to guarantee onsite support for the VIP.
+Also, problem-solving cannot be modeled in BPMN because it is strongly dependent on the actual scenario.
+![CMMN Solve Ticket](src/main/resources/doc/solve_ticket.png)
+
+
+## Create KnowledgeBase entry
+We store the suggested solution in a knowledge base. We create a record in Google Sheets, which is called “knowledgebase_db”.
+![Create a row with a suggested solution in Google Sheets “knowledgebase_db”](src/main/resources/doc/integromat_create_kb.png)
+
+
+## Close Ticket (English Language)
+Once the problem is solved, the ticket is closed. There are two possible ways; either if the customer is satisfied with the solution, the chatbot offered or if the problem was solved by the helpdesk agent. We update the incident data in Google Sheets “incident_db” using webhooks and text. 
+We also send a preformatted e-mail to the requester depending on the language selected. If the incident claim was in English, the e-mail is sent right away.
+![Update data in Google Sheets “incident_db” and sending e-mail (English language)”](src/main/resources/doc/integromat_close_ticket_english.png)
+
+
+## Close Ticket (German Language)
+Once the problem is solved, the ticket is closed. There are two possible ways; either if the customer is satisfied with the solution, the chatbot offered or if the problem was solved by the helpdesk agent. If the incident claim was in German, we translate the accepted solution into English before updating the incident data in Google Sheets “incident_db” using webhooks and text. 
+We also send a preformatted e-mail to the requester depending on the language selected.
+![Update data in Google Sheets “incident_db” and sending e-mail (German language)”](src/main/resources/doc/integromat_close_ticket_english.png)
+
+
+
+
+
+# Camunda Processes Step by Step Guide
+
+Based on on the business logic during the triage process you either can request help directly as mentioned in earlier chapters or chat with a bot.
+
+
+## Issue Creation Process
+To report an incident, you fill out the web form https://gempen.herokuapp.com/triage.html.
+
+
+![Update data in Google Sheets “incident_db” and sending e-mail (German language)”](src/main/resources/doc/step1.png)
+
+1.	Click the following URL to open the web form: https://gempen.herokuapp.com/triage.html   
+2.	Enter name and e-mail
+3.	Select language (default value is ‘English’)
+4.	Choose if the issue prevents you from working (default value is ‘No’)
+5.	Choose if you are on site or off site (default value is ‘on-site’)
+6.	Choose if the issue is compliance relevant (default value is ‘No’)
+7.	Submit the request
+
+
+## Helpdesk Agent
+
+Go to http://gempen.herokuapp.com/
+
+![Camunda Platform Complete Ticket](src/main/resources/doc/step1.png)
+
+
+
+Login credentials:
+*Username: helpdeskagent
+*Password: helpdeskagent 
+
+This is the web application for tracking the ticketing process. The Camunda requests the user name and password to monitor the incident processing level. 
+The helpdesk agent has a complete version of each ticket, as when occurred, why details. The Task list numbers the open incidents to solve according to the priority and compliance as explained before. Each ticket is labeled with ID, Date Created, Version, priority level, Status. 
+The ticket is completed on the priority level red, yellow or green. The red is deployed immediate action, and others are done within some days. The low priority level has a chatbot communication with the user language instantly.  As the Helpdesk Agent is only English speaking the feedback is translated to the user's language and sends to the user email as the ticket is closed. 
+
+
+# Developer Documentation
+
+## Variables
+We used the following set of variables for our process, as shown in the table below. All variables are initialized automatically, so the instantiation of the variables is given each time.
+
+![Used Variables with example values](src/main/resources/doc/system_variables.png)
+
+
 ## Technology
 The following technologies has been used for implementing the process.
 
 | Technology  | Description |
 | ------------- | ------------------ |
 |Camunda Modeler  | The Camunda Modeler is used to create BPMN and DMN models. |
-|Camunda Platform | |
+|Camunda Platform | Process Engine able to run process in different instances |
 |Standard Web Technologies | HTML, CSS and JavaScript is used to create the webfronted and process flow |
-|Integromat |  |
+|Integromat | Used as service integration to manage the service sided interactions, like Google Sheets and emails. |
 |GitHub| Github is used for collaboration and versioning of the programming code as well as the models. |
 |Heroku|Heroku is a PaaS (Platform as a Services) which is used to quickly build, run, and operate the Camunda in the cloud. |
 |Yandex Translate API|Heroku is a PaaS (Platform as a Services) which is used to quickly build, run, and operate the Camunda in the cloud. |
+|Text Editor |Generic text editor |
 
 
+##Instructions for Testing
+With these simple steps, you test the incident management process.
+* Open the Gempen Heroku App (https://gempen.herokuapp.com/triage.html)
+* We consider that you are an employee of our company and your data is stored in our employee database. Therefore you have to use one of the names according to Table 2, only with these names we can check your hierarchy level.
+* Once you write a name from the employee database, the e-mail is automatically filled. If you are a guest in our network, you can fill in your e-mail manually.
+
+![Hierarchy level and hierarchy level description](src/main/resources/doc/test1.png)
+
+The hierarchy level is part of the decision table and changes the severity of the incident. I.e., if the hierarchy level is 5, then the chatbot is circumvented, and the incident is guided directly to the helpdesk staff. All others are directed to the chatbot first.
+
+#Further Enhancements
+
+As mentioned before, our case was developed for an international company with support for English and German speaking employees; we can follow the same structure and tools for developing new languages according to other companies demand.
+The current structure also allows us to adapt the service for a more complex IT support hierarchy, with some additional intents on Dialogflow and expanding the decision table these tools can make an even more accurate classification of each request and even can redirect to different queues.
+
+Enjoy
 
 
-
+~EOF~
